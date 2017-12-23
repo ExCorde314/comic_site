@@ -1,0 +1,32 @@
+{% load static %}
+
+    </div> <!-- /.container -->
+
+    </main>
+
+    <footer class="page-footer">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="black-text">About This Comic</h5>
+                <p class="black-text text-lighten-4">{{ info.about }}</p>
+              </div>
+              <div class="col l4 offset-l2 s12">
+                <h5 class="black-text">Links</h5>
+                <ul>
+                  <li><a class="black-text text-lighten-3" href="{% url 'blog:index' %}">Blog</a></li>
+                  <li><a class="black-text text-lighten-3" href="{% url 'comic:index' %}">Comic</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright black-text">
+            <div class="container">
+            © 2017 Copyright Jonathan Lowe
+            <a class="black-text text-lighten-4 right" href="#!"></a>
+            </div>
+          </div>
+    </footer>
+</body>
+
+</html>

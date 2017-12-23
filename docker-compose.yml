@@ -1,0 +1,15 @@
+comic-site:
+    image: tp33/django
+    container_name: comic-site
+    external_links:
+      -  mysql:db
+    volumes:
+      -  ./comic_site:/app
+    ports:
+      - 8000:8000
+    command: bash -c "cp /app/comic/fixtures/*.png /app/media &&
+                      pip install django-tinymce &&
+                      pip install pillow &&
+                      python manage.py makemigrations blog comic info && 
+                      python manage.py migrate && 
+                      mod_wsgi-express start-server --url-alias /static /app/static --url-alias /media /app/media --working-directory /app --reload-on-changes /app/comic_site/wsgi.py"

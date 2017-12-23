@@ -1,0 +1,14 @@
+{% include "info/header.html" %}
+
+<div class="col s12">
+
+<div class="comic-container center-align">
+    <h2 class="comic-title">{{ info500.title }}</h2>
+
+    <img class="comic" src="{{ info500.image.url }}" alt="{{ info500.alt_text }}"
+         style="max-width: {{ info500.image_width }}px;" title="{{ info500.title_text }}"/>
+</div>
+
+</div> <!-- /.blog-main -->
+
+{% include "info/footer.html" %}

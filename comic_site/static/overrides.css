@@ -1,0 +1,108 @@
+
+
+body {
+    background-color: #E0E0E0;
+    font-family: "Courier New", Courier, monospace !important;
+    font-family: "Lucida Console", Monaco, monospace !important;
+    font-family: Verdana, Geneva, sans-serif !important;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.page-footer {
+    background-color: white !important;
+    border-top: 2px solid black;
+}
+
+.nav-item {
+    color: black;
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.logo-container {
+    padding-left: 0px !important;
+}
+
+.comic-title {
+    font-size: 30px;
+    padding: 0px;
+    margin: 0px;
+}
+
+.comic-container {
+    background-color: white;
+    width: 100%;
+    padding: 30px 0px;
+    margin: 40px 0px 20px 0px;
+    border: 2px solid black;
+}
+
+.comic {
+    width: 100%;
+}
+
+.comic-nav {
+    margin: 10px 0px 10px 0px;
+}
+.comic-nav a {
+    color: black;
+    padding: 5px;
+}
+
+.blog-nav {
+    margin: 40px 0px 10px 0px;
+}
+.blog-nav a {
+    color: black;
+    padding: 5px;
+}
+
+
+#logo {
+    width:100%;
+    max-width: 400px;
+}
+
+.blog-title {
+    font-size: 30px;
+    padding: 0px;
+    margin: 0px;
+}
+
+.blog-meta {
+    margin-bottom: 40px;
+}
+
+.blog-container {
+    background-color: white;
+    width: 100%;
+    padding: 30px 0px;
+    margin: 40px 0px 20px 0px;
+    border: 2px solid black;
+}
+
+@media only screen and (max-width: 750px) {
+    .logo-container {
+        width: 100% !important;
+        text-align: center;
+    }
+
+    .header-nav div {
+        display: block !important;
+        text-align: center;
+    }
+
+    .nav-item {
+        width: 100% !important;
+        display: block !important;
+    }
+}
