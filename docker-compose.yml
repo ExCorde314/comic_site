@@ -12,4 +12,7 @@ comic-site:
                       pip install pillow &&
                       python manage.py makemigrations blog comic info --noinput && 
                       python manage.py migrate --noinput && 
-                      mod_wsgi-express start-server --url-alias /static /app/static --url-alias /media /app/media --working-directory /app --reload-on-changes /app/comic_site/wsgi.py"
+                      mod_wsgi-express start-server --url-alias /static /app/static
+                                                    --url-alias /media /app/media
+                                                    --working-directory /app
+                                                    --reload-on-changes /app/comic_site/wsgi.py"

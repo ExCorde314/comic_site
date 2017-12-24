@@ -4,14 +4,17 @@ comic-site:
     external_links:
       -  mysql:db
     volumes:
-      -  ./comic_site:/app
+      - ./comic_site:/app
+      - /etc/letsencrypt/live/comediccat.com:/certificate
     environment:
       DJANGO_SETTINGS_MODULE: "settings_production"
       PYTHONPATH: "/app/comic_site"
     ports:
-      - 80:8000
+      - 80:80
+      - 443:443
     expose:
       - 80
+      - 443
     command: bash -c "cp /app/comic/fixtures/*.png /app/media &&
                       pip install django-tinymce &&
                       pip install pillow &&
@@ -19,4 +22,14 @@ comic-site:
                       python manage.py makemigrations blog comic info --noinput && 
                       python manage.py migrate --noinput && 
                       python manage.py collectstatic --noinput &&
-                      mod_wsgi-express start-server --url-alias /static /app/static --url-alias /media /app/media --working-directory /app --reload-on-changes /app/comic_site/wsgi_production.py"
+                      mod_wsgi-express start-server --url-alias /static /app/static
+                                                    --url-alias /media /app/media
+                                                    --server-name comediccat.com
+                                                    --port 80
+                                                    --ssl-certificate-file /certificate/fullchain.pem
+                                                    --ssl-certificate-key-file /certificate/privkey.pem
+                                                    --https-only
+                                                    --https-port 443
+                                                    --allow-localhost
+                                                    --working-directory /app
+                                                    --reload-on-changes /app/comic_site/wsgi_production.py"

@@ -25,7 +25,7 @@ with open('/etc/django_secret_key.txt') as f:
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['comediccat.com', 'www.comediccat.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['comediccat.com', 'www.comediccat.com', 'localhost', '127.0.0.1', '127.0.0.1.xip.io']
 ADMINS = [('Jonathan Lowe', 'comediccatcomic@gmail.com')]
 
 # Deployment security
