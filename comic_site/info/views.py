@@ -24,3 +24,27 @@ def custom_500(request):
     }
 
     return render(request, 'info/500_page.html', context)
+
+# 403 error page
+def custom_403(request):
+    info = Info.load()
+    info403 = Info403.load()
+
+    context = {
+        'info': info,
+        'info403': info403,
+    }
+
+    return render(request, 'info/403_page.html', context)
+
+# 400 error page
+def custom_400(request):
+    info = Info.load()
+    info400 = Info400.load()
+
+    context = {
+        'info': info,
+        'info400': info400,
+    }
+
+    return render(request, 'info/400_page.html', context)

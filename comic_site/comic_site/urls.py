@@ -21,3 +21,8 @@ urlpatterns = [
     url(r'^blog/', include('blog.urls')),
     url(r'^tinymce/', include('tinymce.urls')),
 ]
+
+handler404 = 'info.views.custom_404'
+handler500 = 'info.views.custom_500'
+handler403 = 'info.views.custom_403'
+handler400 = 'info.views.custom_400'

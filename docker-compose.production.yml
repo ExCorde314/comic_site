@@ -1,0 +1,22 @@
+comic-site:
+    image: tp33/django
+    container_name: comic-site
+    external_links:
+      -  mysql:db
+    volumes:
+      -  ./comic_site:/app
+    environment:
+      DJANGO_SETTINGS_MODULE: "settings_production"
+      PYTHONPATH: "/app/comic_site"
+    ports:
+      - 80:8000
+    expose:
+      - 80
+    command: bash -c "cp /app/comic/fixtures/*.png /app/media &&
+                      pip install django-tinymce &&
+                      pip install pillow &&
+                      python /app/comic_site/generate_secret_key.py &&
+                      python manage.py makemigrations blog comic info --noinput && 
+                      python manage.py migrate --noinput && 
+                      python manage.py collectstatic --noinput &&
+                      mod_wsgi-express start-server --url-alias /static /app/static --url-alias /media /app/media --working-directory /app --reload-on-changes /app/comic_site/wsgi_production.py"
