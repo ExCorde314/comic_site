@@ -1,11 +1,11 @@
 comic-site:
-    image: tp33/django
+    image: excorde314/comic-site:1.0
     container_name: comic-site
     external_links:
       -  mysql:db
     volumes:
       - ./comic_site:/app
-      - /etc/letsencrypt/live/comediccat.com:/certificate
+      - /etc/letsencrypt:/certificate
     environment:
       DJANGO_SETTINGS_MODULE: "settings_production"
       PYTHONPATH: "/app/comic_site"
@@ -16,8 +16,6 @@ comic-site:
       - 80
       - 443
     command: bash -c "cp /app/comic/fixtures/*.png /app/media &&
-                      pip install django-tinymce &&
-                      pip install pillow &&
                       python /app/comic_site/generate_secret_key.py &&
                       python manage.py makemigrations blog comic info --noinput && 
                       python manage.py migrate --noinput && 
@@ -26,8 +24,8 @@ comic-site:
                                                     --url-alias /media /app/media
                                                     --server-name comediccat.com
                                                     --port 80
-                                                    --ssl-certificate-file /certificate/fullchain.pem
-                                                    --ssl-certificate-key-file /certificate/privkey.pem
+                                                    --ssl-certificate-file /certificate/archive/comediccat.com/fullchain1.pem
+                                                    --ssl-certificate-key-file /certificate/archive/comediccat.com/privkey1.pem
                                                     --https-only
                                                     --https-port 443
                                                     --allow-localhost

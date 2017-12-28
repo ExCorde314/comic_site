@@ -1,5 +1,5 @@
 comic-site:
-    image: tp33/django
+    image: excorde314/comic-site:1.0
     container_name: comic-site
     external_links:
       -  mysql:db
@@ -8,8 +8,6 @@ comic-site:
     ports:
       - 8000:8000
     command: bash -c "cp /app/comic/fixtures/*.png /app/media &&
-                      pip install django-tinymce &&
-                      pip install pillow &&
                       python manage.py makemigrations blog comic info --noinput && 
                       python manage.py migrate --noinput && 
                       mod_wsgi-express start-server --url-alias /static /app/static
