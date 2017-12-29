@@ -136,7 +136,7 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 MEDIA_ROOT = '/app/media/'
-MEDIA_URL = 'http://comediccat.com/media/'
+MEDIA_URL = 'https://comediccat.com/media/'
 
 DEFAULT_FROM_EMAIL = 'webmaster@comediccat.com'
 SERVER_EMAIL = 'webmaster@comediccat.com'

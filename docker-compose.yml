@@ -7,9 +7,10 @@ comic-site:
       -  ./comic_site:/app
     ports:
       - 8000:8000
-    command: bash -c "cp /app/comic/fixtures/*.png /app/media &&
-                      python manage.py makemigrations blog comic info --noinput && 
-                      python manage.py migrate --noinput && 
+    command: bash -c "cp /app/fixtures/*.png /app/media &&
+                      python manage.py makemigrations blog comic info --noinput &&
+                      python manage.py migrate --noinput &&
+                      python manage.py loaddata /app/fixtures/db.json &&
                       mod_wsgi-express start-server --url-alias /static /app/static
                                                     --url-alias /media /app/media
                                                     --working-directory /app

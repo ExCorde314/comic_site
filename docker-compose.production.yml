@@ -15,10 +15,11 @@ comic-site:
     expose:
       - 80
       - 443
-    command: bash -c "cp /app/comic/fixtures/*.png /app/media &&
+    command: bash -c "cp /app/fixtures/*.png /app/media &&
                       python /app/comic_site/generate_secret_key.py &&
-                      python manage.py makemigrations blog comic info --noinput && 
-                      python manage.py migrate --noinput && 
+                      python manage.py makemigrations blog comic info --noinput &&
+                      python manage.py migrate --noinput &&
+                      python manage.py loaddata /app/fixtures/db.json &&
                       python manage.py collectstatic --noinput &&
                       mod_wsgi-express start-server --url-alias /static /app/static
                                                     --url-alias /media /app/media

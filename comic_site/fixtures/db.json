@@ -1,0 +1,126 @@
+[
+   {  
+      "model":"comic.comic",
+      "pk":1,
+      "fields":{  
+         "title":"Finding A Hat",
+         "image":"finding_a_hat_.png",
+         "image_width":"3000",
+         "image_height":"1395",
+         "title_text":"Hats are mysterious things",
+         "alt_text":"A person finds a hat",
+         "date_published":"2017-01-14T21:34:28.572Z"
+      }
+   },
+   {  
+      "model":"comic.comic",
+      "pk":2,
+      "fields":{  
+         "title":"An Unusually Happy Morning",
+         "image":"unusually_happy_morning.png",
+         "image_width":"3000",
+         "image_height":"1139",
+         "title_text":"Coffee sometimes goes a long way to making a great day.",
+         "alt_text":"Happy person walking",
+         "date_published":"2017-01-15T02:15:21.820Z"
+      }
+   },
+   {  
+      "model":"comic.comic",
+      "pk":3,
+      "fields":{  
+         "title":"The Hat Has A Cat",
+         "image":"the_hat_has_a_hat.png",
+         "image_width":"3000",
+         "image_height":"948",
+         "title_text":"Sometimes you find things in unexpected places.",
+         "alt_text":"A person pulls a cat out of a hat",
+         "date_published":"2017-01-15T05:18:02.635Z"
+      }
+   },
+   {  
+      "model":"comic.comic",
+      "pk":4,
+      "fields":{  
+         "title":"The Grounds",
+         "image":"the_grounds.png",
+         "image_width":"3000",
+         "image_height":"1397",
+         "title_text":"He'll never say 'Freshman' again!",
+         "alt_text":"Burning at the stake",
+         "date_published":"2017-01-19T23:00:10.080Z"
+      }
+   },
+   {  
+      "model":"blog.post",
+      "pk":1,
+      "fields":{  
+         "title":"Hello World!",
+         "author":"Jonathan Lowe",
+         "date_published":"2017-01-18T19:41:59.757Z",
+         "content":"<p>Hello world!</p>\r\n<p>I have decided to make a web comic, for my own personal enjoyment and so I would have a reason to learn about building websites.</p>\r\n<p>I have posted some comics I drew a while ago and will add more eventually; I will be busy for the next few months.</p>\r\n<p>This blog will be primarially used for posting updates and information about the comic.</p>\r\n<p>Adios amigos!</p>"
+      }
+   },
+   {  
+      "model":"info.info",
+      "pk":1,
+      "fields":{  
+         "site_name":"Comedic Cat",
+         "charset":"utf-8",
+         "logo":"logo.png",
+         "about":"This comic is about ordinary, intriguing, and downright strange things and contains some interesting characters."
+      }
+   },
+   {  
+      "model":"info.info404",
+      "pk":1,
+      "fields":{  
+         "title":"404 Page Not Found",
+         "image":"404_image.png",
+         "image_width":"500",
+         "image_height":"1808",
+         "title_text":"You must be expecting to find something...",
+         "alt_text":"Wondering cat and hatted figure",
+         "message":"Try here for comics."
+      }
+   },
+   {  
+      "model":"info.info500",
+      "pk":1,
+      "fields":{  
+         "title":"500 Something Broke Here...",
+         "image":"404_image.png",
+         "image_width":"500",
+         "image_height":"1808",
+         "title_text":"You must be expecting to find something...",
+         "alt_text":"Wondering cat and hatted figure",
+         "message":"Try here for comics."
+      }
+   },
+   {  
+      "model":"info.info403",
+      "pk":1,
+      "fields":{  
+         "title":"403 You aren't supposed to be here",
+         "image":"404_image.png",
+         "image_width":"500",
+         "image_height":"500",
+         "title_text":"You must be expecting to find something...",
+         "alt_text":"Wondering cat and hatted figure",
+         "message":"Try here for comics."
+      }
+   },
+   {  
+      "model":"info.info400",
+      "pk":1,
+      "fields":{  
+         "title":"400 Bad request",
+         "image":"404_image.png",
+         "image_width":"500",
+         "image_height":"500",
+         "title_text":"You must be expecting to find something...",
+         "alt_text":"Wondering cat and hatted figure",
+         "message":"Try here for comics."
+      }
+   }
+]
