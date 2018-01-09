@@ -93,3 +93,5 @@ local_settings.py
 migrations/
 .env
 db.sqlite3
+*.css.map
+*/.sass-cache/*
