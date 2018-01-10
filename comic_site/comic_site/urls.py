@@ -19,6 +19,7 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^', include('comic.urls')),
     url(r'^blog/', include('blog.urls')),
+    url(r'^access-portal/', include('info.urls')),
     url(r'^tinymce/', include('tinymce.urls')),
 ]
 
