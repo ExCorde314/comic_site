@@ -1,6 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from info.models import Info
 from .models import Post
+from .forms import AddPost, ChangePost
+from django.http import Http404
 
 # The landing page of the blog
 def index(request):
@@ -33,7 +35,7 @@ def index(request):
     }
 
     # Renders the result
-    return render(request, 'blog/single_post.html', context)
+    return render(request, 'blog/single.html', context)
 
 # Single blog post page
 def single(request, post_id):
@@ -66,4 +68,45 @@ def single(request, post_id):
     }
 
     # Renders the result
-    return render(request, 'blog/single_post.html', context)
+    return render(request, 'blog/single.html', context)
+
+def add(request):
+    if not request.user.is_authenticated or not request.user.has_perm('blog.add_post'):
+        raise Http404
+
+    if request.method == "POST":
+        form = AddPost(request.POST)
+
+        if not form.is_valid():
+            # Prepares the context for the page
+            info = Info.objects.order_by('site_name')[0]
+            context = {
+                'info': info,
+                'user_logged_in': True,
+                'form': form,
+            }
+
+            return render(request, 'blog/add.html', context)
+
+        form.save()
+        return redirect('blog:index')
+    
+    info = Info.objects.order_by('site_name')[0]
+    form = AddPost()
+
+    # Prepares the context for the page
+    context = {
+        'info': info,
+        'user_logged_in': True,
+        'form': form,
+    }
+
+    return render(request, 'blog/add.html', context)
+
+def change(request):
+    context = {}
+    return render(request, 'blog/change.html', context)
+
+def delete(request):
+    context = {}
+    return render(request, 'blog/delete.html', context)

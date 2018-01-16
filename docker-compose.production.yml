@@ -1,5 +1,5 @@
 comic-site:
-    image: excorde314/comic-site:1.0
+    image: excorde314/comic-site:1.1
     container_name: comic-site
     external_links:
       -  mysql:db

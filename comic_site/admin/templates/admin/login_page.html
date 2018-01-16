@@ -30,7 +30,7 @@
                     {% endif %}
 
                     <label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
-                    <input type="text" id="{{ form.username.id_for_label }}" name="{{ form.username.html_name }}" value="{{ form.username.value }}" class="form-control {% if form.username.errors %} is-invalid {% endif %}" placeholder="Username" autofocus>
+                    <input type="text" id="{{ form.username.id_for_label }}" name="{{ form.username.html_name }}" {% if form.username.value %} value="{{ form.username.value }}" {% endif %} class="form-control {% if form.username.errors %} is-invalid {% endif %}" placeholder="Username" autofocus>
                     {% if form.username.errors %}<div class="invalid-feedback">{{ form.username.errors }}</div>{% endif %}
                     
                     <label for="{{ form.password.id_for_label }}">{{ form.password.label }}</label>

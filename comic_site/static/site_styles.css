@@ -1184,35 +1184,38 @@ pre {
 
   .offset-xl-11 {
     margin-left: 91.6666666667%; } }
-.table {
+.table, .markdown table {
   width: 100%;
   max-width: 100%;
   margin-bottom: 1rem;
   background-color: transparent; }
-  .table th,
-  .table td {
+  .table th, .markdown table th,
+  .table td,
+  .markdown table td {
     padding: 0.75rem;
     vertical-align: top;
     border-top: 1px solid #dee2e6; }
-  .table thead th {
+  .table thead th, .markdown table thead th {
     vertical-align: bottom;
     border-bottom: 2px solid #dee2e6; }
-  .table tbody + tbody {
+  .table tbody + tbody, .markdown table tbody + tbody {
     border-top: 2px solid #dee2e6; }
-  .table .table {
+  .table .table, .markdown table .table, .table .markdown table, .markdown .table table, .markdown table table {
     background-color: #fff; }
 
 .table-sm th,
 .table-sm td {
   padding: 0.3rem; }
 
-.table-bordered {
+.table-bordered, .markdown table {
   border: 1px solid #dee2e6; }
-  .table-bordered th,
-  .table-bordered td {
+  .table-bordered th, .markdown table th,
+  .table-bordered td,
+  .markdown table td {
     border: 1px solid #dee2e6; }
-  .table-bordered thead th,
-  .table-bordered thead td {
+  .table-bordered thead th, .markdown table thead th,
+  .table-bordered thead td,
+  .markdown table thead td {
     border-bottom-width: 2px; }
 
 .table-striped tbody tr:nth-of-type(odd) {
@@ -1320,11 +1323,11 @@ pre {
   .table-hover .table-active:hover > th {
     background-color: rgba(0, 0, 0, 0.075); }
 
-.table .thead-dark th {
+.table .thead-dark th, .markdown table .thead-dark th {
   color: #fff;
   background-color: #212529;
   border-color: #32383e; }
-.table .thead-light th {
+.table .thead-light th, .markdown table .thead-light th {
   color: #495057;
   background-color: #e9ecef;
   border-color: #dee2e6; }
@@ -1336,7 +1339,7 @@ pre {
   .table-dark td,
   .table-dark thead th {
     border-color: #32383e; }
-  .table-dark.table-bordered {
+  .table-dark.table-bordered, .markdown table.table-dark {
     border: 0; }
   .table-dark.table-striped tbody tr:nth-of-type(odd) {
     background-color: rgba(255, 255, 255, 0.05); }
@@ -1350,7 +1353,7 @@ pre {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: -ms-autohiding-scrollbar; }
-    .table-responsive-sm > .table-bordered {
+    .table-responsive-sm > .table-bordered, .markdown .table-responsive-sm > table {
       border: 0; } }
 @media (max-width: 767.99px) {
   .table-responsive-md {
@@ -1359,7 +1362,7 @@ pre {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: -ms-autohiding-scrollbar; }
-    .table-responsive-md > .table-bordered {
+    .table-responsive-md > .table-bordered, .markdown .table-responsive-md > table {
       border: 0; } }
 @media (max-width: 991.99px) {
   .table-responsive-lg {
@@ -1368,7 +1371,7 @@ pre {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: -ms-autohiding-scrollbar; }
-    .table-responsive-lg > .table-bordered {
+    .table-responsive-lg > .table-bordered, .markdown .table-responsive-lg > table {
       border: 0; } }
 @media (max-width: 1199.99px) {
   .table-responsive-xl {
@@ -1377,7 +1380,7 @@ pre {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: -ms-autohiding-scrollbar; }
-    .table-responsive-xl > .table-bordered {
+    .table-responsive-xl > .table-bordered, .markdown .table-responsive-xl > table {
       border: 0; } }
 .table-responsive {
   display: block;
@@ -1385,7 +1388,7 @@ pre {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: -ms-autohiding-scrollbar; }
-  .table-responsive > .table-bordered {
+  .table-responsive > .table-bordered, .markdown .table-responsive > table {
     border: 0; }
 
 .form-control {
@@ -6463,14 +6466,16 @@ a.text-dark:focus, a.text-dark:hover {
   .badge {
     border: 1px solid #000; }
 
-  .table {
+  .table, .markdown table {
     border-collapse: collapse !important; }
-    .table td,
-    .table th {
+    .table td, .markdown table td,
+    .table th,
+    .markdown table th {
       background-color: #fff !important; }
 
-  .table-bordered th,
-  .table-bordered td {
+  .table-bordered th, .markdown table th,
+  .table-bordered td,
+  .markdown table td {
     border: 1px solid #ddd !important; } }
 html {
   font-size: 14px; }
@@ -6537,6 +6542,13 @@ footer {
   .comic-nav a {
     color: black;
     padding: 5px; }
+
+.markdown table thead th {
+  border-bottom: 2px solid #000; }
+.markdown table td {
+  border: 1px solid #000; }
+.markdown table th {
+  border: 1px solid #000; }
 
 .form-btn {
   color: #000;

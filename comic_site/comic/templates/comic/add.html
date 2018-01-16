@@ -18,15 +18,15 @@
             {% endif %}
 
             <label for="{{ form.title.id_for_label }}">{{ form.title.label }}</label>
-            <input type="text" id="{{ form.title.id_for_label }}" name="{{ form.title.html_name }}" value="{{ form.title.value }}" class="form-control {% if form.title.errors %} is-invalid {% endif %}" placeholder="Title" autofocus>
+            <input type="text" id="{{ form.title.id_for_label }}" name="{{ form.title.html_name }}" {% if form.title.value %} value="{{ form.title.value }}" {% endif %} class="form-control {% if form.title.errors %} is-invalid {% endif %}" placeholder="Title" autofocus>
             {% if form.title.errors %}<div class="invalid-feedback">{{ form.title.errors }}</div>{% endif %}
 
             <label for="{{ form.title_text.id_for_label }}">{{ form.title_text.label }}</label>
-            <input type="text" id="{{ form.title_text.id_for_label }}" name="{{ form.title_text.html_name }}" value="{{ form.title_text.value }}" class="form-control {% if form.title_text.errors %} is-invalid {% endif %}" placeholder="Title Text">
+            <input type="text" id="{{ form.title_text.id_for_label }}" name="{{ form.title_text.html_name }}" {% if form.title_text.value %} value="{{ form.title_text.value }}" {% endif %} class="form-control {% if form.title_text.errors %} is-invalid {% endif %}" placeholder="Title Text">
             {% if form.title_text.errors %}<div class="invalid-feedback">{{ form.title_text.errors }}</div>{% endif %}
 
             <label for="{{ form.alt_text.id_for_label }}">{{ form.alt_text.label }}</label>
-            <input type="text" id="{{ form.alt_text.id_for_label }}" name="{{ form.alt_text.html_name }}" value="{{ form.alt_text.value }}" class="form-control {% if form.alt_text.errors %} is-invalid {% endif %}" placeholder="Alt Text">
+            <input type="text" id="{{ form.alt_text.id_for_label }}" name="{{ form.alt_text.html_name }}" {% if form.alt_text.value%} value="{{ form.alt_text.value }}" {% endif %} class="form-control {% if form.alt_text.errors %} is-invalid {% endif %}" placeholder="Alt Text">
             {% if form.alt_text.errors %}<div class="invalid-feedback">{{ form.alt_text.errors }}</div>{% endif %}
 
             <label for="{{ form.image.id_for_label }}">{{ form.image.label }}</label>

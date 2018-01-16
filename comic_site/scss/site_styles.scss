@@ -117,6 +117,23 @@ footer {
     }
 }
 
+.markdown table {
+    @extend .table;
+    @extend .table-bordered;
+
+    thead th {
+        border-bottom: 2px solid $black;
+    }
+
+    td {
+        border: 1px solid $black;
+    }
+
+    th {
+        border: 1px solid $black;
+    }
+}
+
 .form-btn {
     color: $black;
     margin-top: 20px;

@@ -1,5 +1,5 @@
 comic-site:
-    image: excorde314/comic-site:1.0
+    image: excorde314/comic-site:1.1
     container_name: comic-site
     external_links:
       -  mysql:db
@@ -8,7 +8,6 @@ comic-site:
     ports:
       - 8000:8000
     command: bash -c "cp /app/fixtures/*.png /app/media &&
-                      pip install "django-markdownx==2.0.21" &&
                       python manage.py makemigrations blog comic info admin --noinput &&
                       python manage.py migrate --noinput &&
                       python manage.py loaddata /app/fixtures/db.json &&

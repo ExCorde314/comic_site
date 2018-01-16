@@ -21,8 +21,6 @@ urlpatterns = [
     url(r'^comic/', include('comic.urls')),
     url(r'^blog/', include('blog.urls')),
     url(r'^access-portal/', include('admin.urls')),
-    url(r'^tinymce/', include('tinymce.urls')),
-    url(r'^markdownx/', include('markdownx.urls')),
 ]
 
 handler404 = 'info.views.custom_404'
