@@ -95,3 +95,4 @@ migrations/
 db.sqlite3
 *.css.map
 */.sass-cache/*
+*/media/*

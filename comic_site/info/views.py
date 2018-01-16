@@ -1,46 +1,5 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, logout
-
+from django.shortcuts import render
 from .models import Info, Info404, Info500
-from .forms import LoginForm
-
-# login page
-def login_page(request):
-    # If the user is logged in, redirect to main page
-    if request.user.is_authenticated:
-        return redirect('comic:index')
-
-    # If the request is a post, try to log them in
-    if request.method == "POST":
-        form = LoginForm(request.POST)
-
-        # If the form is not valid, return it with errors
-        if not form.is_valid():
-            context = { 'form' : form, }
-            return render(request, 'info/login.html', context)
-
-        # Authenticate the user
-        user = authenticate(username=form.cleaned_data["username"], password=form.cleaned_data["password"])
-        
-        # If authenticated, redirect to the homepage
-        if user is not None:
-            login(request, user)
-            return redirect('comic:index')
-
-        # Otherwise render the form with errors
-        form.add_error(None, 'The username or password is invalid')
-        context = { 'form' : form, }
-        return render(request, 'info/login.html', context)        
-
-    # Otherwise render the page
-    form = LoginForm()
-    context = { 'form' : form, }
-    return render(request, 'info/login.html', context)
-
-# logout page
-def logout_page(request):
-    logout(request)
-    return redirect('comic:index')
 
 # 404 error page
 def custom_404(request):

@@ -1,0 +1,45 @@
+{% include "info/header.html" %}
+
+<div class="row">
+    <div class="col-12">
+        <div class="comic-container">
+
+        <div class="container">
+
+        <form id="add-comic-form" enctype="multipart/form-data" method="post" name="add_comic" class="add-comic-form center-align">
+            {% csrf_token %}
+
+            <h2 class="comic-title text-center">Add New Comic</h2>
+
+            {% if form.non_field_errors %}
+            <div class="text-center">
+                {{ form.non_field_errors }}
+            </div>
+            {% endif %}
+
+            <label for="{{ form.title.id_for_label }}">{{ form.title.label }}</label>
+            <input type="text" id="{{ form.title.id_for_label }}" name="{{ form.title.html_name }}" value="{{ form.title.value }}" class="form-control {% if form.title.errors %} is-invalid {% endif %}" placeholder="Title" autofocus>
+            {% if form.title.errors %}<div class="invalid-feedback">{{ form.title.errors }}</div>{% endif %}
+
+            <label for="{{ form.title_text.id_for_label }}">{{ form.title_text.label }}</label>
+            <input type="text" id="{{ form.title_text.id_for_label }}" name="{{ form.title_text.html_name }}" value="{{ form.title_text.value }}" class="form-control {% if form.title_text.errors %} is-invalid {% endif %}" placeholder="Title Text">
+            {% if form.title_text.errors %}<div class="invalid-feedback">{{ form.title_text.errors }}</div>{% endif %}
+
+            <label for="{{ form.alt_text.id_for_label }}">{{ form.alt_text.label }}</label>
+            <input type="text" id="{{ form.alt_text.id_for_label }}" name="{{ form.alt_text.html_name }}" value="{{ form.alt_text.value }}" class="form-control {% if form.alt_text.errors %} is-invalid {% endif %}" placeholder="Alt Text">
+            {% if form.alt_text.errors %}<div class="invalid-feedback">{{ form.alt_text.errors }}</div>{% endif %}
+
+            <label for="{{ form.image.id_for_label }}">{{ form.image.label }}</label>
+            <input type="file" id="{{ form.image.id_for_label }}" name="{{ form.image.html_name }}" class="form-control {% if form.image.errors %} is-invalid {% endif %}">
+            {% if form.image.errors %}<div class="invalid-feedback">{{ form.image.errors }}</div>{% endif %}
+            
+            <button class="btn form-btn" type="submit" form="add-comic-form">Add Comic</button>
+        </form>
+
+        </div>
+
+        </div>
+    </div>
+</div>
+
+{% include "info/footer.html" %}

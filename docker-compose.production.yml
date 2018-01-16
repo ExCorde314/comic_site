@@ -17,7 +17,7 @@ comic-site:
       - 443
     command: bash -c "cp /app/fixtures/*.png /app/media &&
                       python /app/comic_site/generate_secret_key.py &&
-                      python manage.py makemigrations blog comic info --noinput &&
+                      python manage.py makemigrations blog comic info admin --noinput &&
                       python manage.py migrate --noinput &&
                       python manage.py loaddata /app/fixtures/db.json &&
                       python manage.py collectstatic --noinput &&

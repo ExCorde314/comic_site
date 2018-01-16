@@ -1,0 +1,16 @@
+{% include "info/header.html" %}
+
+<div class="row">
+    <div class="col-12">
+        <div class="comic-container">
+
+        <h2 class="comic-title text-center">{{ comic.title }}</h2>
+
+        <img class="comic" src="{{ comic.image.url }}" alt="{{ comic.title_text }}"
+             style="max-width: {{ comic.image_width }}px;" />
+
+        </div>
+    </div>
+</div>
+
+{% include "info/footer.html" %}

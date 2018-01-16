@@ -1,16 +1,21 @@
 {% include "info/header.html" %}
 
-<div class="col-12 comic-container">
-    <h2 class="comic-title text-center">{{ comic.title }}</h2>
+<div class="row">
+    <div class="col-12">
+        <div class="comic-container">
 
-    <img class="comic" src="{{ comic.image.url }}" alt="{{ comic.title_text }}"
-         style="max-width: {{ comic.image_width }}px;" />
+        <h2 class="comic-title text-center">{{ comic.title }}</h2>
 
-    <div class="comic-nav row">
-        <div class="col-3 text-right"><a href="{% url 'comic:single' first %}">First</a></div>
-        <div class="col-2 text-left"><a href="{% url 'comic:single' previous %}">Previous</a></div>
-        <div class="col-4 text-right"><a href="{% url 'comic:single' next %}">Next</a></div>
-        <div class="col-3 text-left"><a href="{% url 'comic:index' %}">Latest</a></div>
+        <img class="comic" src="{{ comic.image.url }}" title="{{ comic.title_text }}" alt="{{ comic.alt_text }}" />
+
+        <div class="comic-nav row">
+            <div class="col-3 text-right"><a href="{% url 'comic:single' first %}">First</a></div>
+            <div class="col-2 text-left"><a href="{% url 'comic:single' previous %}">Previous</a></div>
+            <div class="col-4 text-right"><a href="{% url 'comic:single' next %}">Next</a></div>
+            <div class="col-3 text-left"><a href="{% url 'comic:index' %}">Latest</a></div>
+        </div>
+
+        </div>
     </div>
 </div>
 

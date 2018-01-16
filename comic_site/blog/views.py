@@ -4,6 +4,9 @@ from .models import Post
 
 # The landing page of the blog
 def index(request):
+    # Gets whether or not the user is logged in
+    user_logged_in = request.user.is_authenticated
+    
     # Gets the latest and first blog posts
     post = Post.objects.filter(date_published__isnull=False).latest('date_published')
     earliest = Post.objects.filter(date_published__isnull=False).earliest('date_published')
@@ -26,6 +29,7 @@ def index(request):
         'next': next_post,
         'previous': previous_post,
         'info': info,
+        'user_logged_in': user_logged_in,
     }
 
     # Renders the result
@@ -33,6 +37,9 @@ def index(request):
 
 # Single blog post page
 def single(request, post_id):
+    # Gets whether or not the user is logged in
+    user_logged_in = request.user.is_authenticated
+
     # Gets the current post and the first post
     post = get_object_or_404(Post, pk=post_id)
     earliest = Post.objects.filter(date_published__isnull=False).earliest('date_published')
@@ -55,6 +62,7 @@ def single(request, post_id):
         'next': next_post,
         'previous': previous_post,
         'info': info,
+        'user_logged_in': user_logged_in,
     }
 
     # Renders the result

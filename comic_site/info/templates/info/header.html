@@ -18,6 +18,28 @@
     <nav class="main-navbar">
         <div class="container">
 
+        {% if user_logged_in %}
+
+        <div class="row">
+            <div class="col-md-6 text-center text-md-left">
+                <a href="{% url 'comic:index' %}" class=""><img id="logo" src="{{ info.logo.url }}" /></a>
+            </div>
+
+            <div class="col-md-2 align-self-center text-md-right text-center">
+                <a class="nav-item" href="{% url 'admin:admin-panel' %}">Admin</a>
+            </div>
+
+            <div class="col-md-2 align-self-center text-md-right text-center">
+                <a class="nav-item" href="{% url 'blog:index' %}">Blog</a>
+            </div>
+
+            <div class="col-md-2 align-self-center text-md-right text-center">
+                <a class="nav-item" href="{% url 'comic:index' %}">Comic</a>
+            </div>
+        </div>
+
+        {% else %}
+
         <div class="row">
             <div class="col-md-8 text-center text-md-left">
                 <a href="{% url 'comic:index' %}" class=""><img id="logo" src="{{ info.logo.url }}" /></a>
@@ -31,6 +53,8 @@
                 <a class="nav-item" href="{% url 'comic:index' %}">Comic</a>
             </div>
         </div>
+
+        {% endif %}
 
         </div>
     </nav>

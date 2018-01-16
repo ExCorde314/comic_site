@@ -41,15 +41,16 @@ SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 
 # Application definition
 INSTALLED_APPS = [
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'markdownx',
     'comic',
     'blog',
     'info',
+    'admin',
 ]
 
 MIDDLEWARE = [

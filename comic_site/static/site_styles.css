@@ -6505,8 +6505,7 @@ footer {
   list-style-type: none;
   padding: 0px;
   margin: 0px;
-  color: #dc3545;
-  text-align: center; }
+  color: #dc3545; }
 
 .nav-item, .nav-item:hover {
   color: black;
@@ -6530,7 +6529,8 @@ footer {
   border: 2px solid black; }
 
 .comic {
-  width: 100%; }
+  width: 100%;
+  max-width: 3000px; }
 
 .comic-nav {
   margin: 10px 0px 10px 0px; }
@@ -6538,7 +6538,7 @@ footer {
     color: black;
     padding: 5px; }
 
-.login-btn {
+.form-btn {
   color: #000;
   margin-top: 20px;
   background-color: #fff;

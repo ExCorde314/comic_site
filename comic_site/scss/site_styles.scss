@@ -76,7 +76,6 @@ footer {
     padding: 0px;
     margin: 0px;
     color: $red;
-    text-align: center;
 }
 
 .nav-item, .nav-item:hover {
@@ -106,6 +105,7 @@ footer {
 
 .comic {
     width: 100%;
+    max-width: 3000px;
 }
 
 .comic-nav {
@@ -117,7 +117,7 @@ footer {
     }
 }
 
-.login-btn {
+.form-btn {
     color: $black;
     margin-top: 20px;
     background-color: $white;
