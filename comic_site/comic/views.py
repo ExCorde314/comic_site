@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from info.models import Info
 from .models import Comic
-from .forms import AddComic, ChangeComic
+from .forms import AddComic, ChangeComic, DeleteComic
 from django.http import Http404
 
 # The home page
@@ -36,7 +36,7 @@ def index(request):
     }
 
     # Renders the result
-    return render(request, 'comic/comic.html', context)
+    return render(request, 'comic/single.html', context)
 
 # Single view page 
 def single(request, comic_id):
@@ -69,7 +69,7 @@ def single(request, comic_id):
     }
 
     # Renders the result
-    return render(request, 'comic/comic.html', context)
+    return render(request, 'comic/single.html', context)
 
 def add(request):
     if not request.user.is_authenticated or not request.user.has_perm('comic.add_comic'):
@@ -108,27 +108,73 @@ def add(request):
 def change(request, comic_id):
     if not request.user.is_authenticated or not request.user.has_perm("comic.change_comic"):
         raise Http404
-    
+
+    comic = get_object_or_404(Comic, pk=comic_id)
+
+    if request.method == "POST":
+        form = ChangeComic(request.POST, instance=comic)
+
+        if not form.is_valid():
+            # Prepares the context for the page
+            info = Info.objects.order_by('site_name')[0]
+            context = {
+                'info': info,
+                'user_logged_in': True,
+                'form': form,
+                'comic': comic,
+            }
+
+            return render(request, 'comic/change.html', context)
+
+        form.save()
+        return redirect('comic:single', comic_id=comic_id)
+
     info = Info.objects.order_by('site_name')[0]
+    form = ChangeComic(instance=comic)
 
     # Prepares the context for the page
     context = {
         'info': info,
         'user_logged_in': True,
+        'form': form,
+        'comic': comic,
     }
 
-    return render(request, 'comic/comic_edit.html', context)
+    return render(request, 'comic/change.html', context)
 
 def delete(request, comic_id):
     if not request.user.is_authenticated or not request.user.has_perm("comic.delete_comic"):
         raise Http404
     
+    comic = get_object_or_404(Comic, pk=comic_id)
+
+    if request.method == "POST":
+        form = DeleteComic(request.POST)
+
+        if not form.is_valid():
+            # Prepares the context for the page
+            info = Info.objects.order_by('site_name')[0]
+            context = {
+                'info': info,
+                'user_logged_in': True,
+                'form': form,
+                'comic': comic,
+            }
+
+            return render(request, 'comic/delete.html', context)
+
+        comic.delete()
+        return redirect('comic:index')
+    
     info = Info.objects.order_by('site_name')[0]
+    form = DeleteComic()
 
     # Prepares the context for the page
     context = {
         'info': info,
         'user_logged_in': True,
+        'form': form,
+        'comic': comic,
     }
 
-    return render(request, 'comic/comic_edit.html', context)
+    return render(request, 'comic/delete.html', context)

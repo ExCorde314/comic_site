@@ -7,9 +7,9 @@ register = template.Library()
 
 @register.filter
 def markdown(value):
-    return mark_safe(
-        bleach.clean(
-            md.markdown(value, escape=False), 
+    return mark_safe( # Lets Django know that the generated html is safe 
+        bleach.clean( # Cleans the html of unauthorized tags
+            md.markdown(value, escape=False), # Generates the html from markdown
             attributes = {
                             u'a': [u'href', u'title', u'target'],
                             u'th': [u'align'],

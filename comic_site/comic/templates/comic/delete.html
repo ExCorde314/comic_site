@@ -1,0 +1,27 @@
+{% include "info/header.html" %}
+
+<div class="row">
+    <div class="col-12">
+        <div class="comic-container">
+
+        <div class="container pb-3">
+            
+        <form id="delete-comic-form" method="post" name="delete_comic" class="delete-comic-form center-align">
+            {% csrf_token %}
+
+            <h1 class="text-center">Are You Sure?</h1>
+
+            <button class="btn form-btn" type="submit" form="delete-comic-form">Delete Comic</button>
+        </form>
+
+        </div>
+
+        <h1 class="comic-title text-center">{{ comic.title }}</h1>
+
+        <img class="comic" src="{{ comic.image.url }}" title="{{ comic.title_text }}" alt="{{ comic.alt_text }}" />
+
+        </div>
+    </div>
+</div>
+
+{% include "info/footer.html" %}

@@ -1,0 +1,29 @@
+{% load markdown %}
+{% include "info/header.html" %}
+
+<div class="row">
+    <div class="col-12">
+        <div class="blog-container">
+
+        <div class="container pb-3">
+
+        <form id="delete-post-form" method="post" name="delete_post" class="delete-post-form center-align">
+            {% csrf_token %}
+
+            <h1 class="text-center">Are You Sure?</h1>
+
+            <button class="btn form-btn" type="submit" form="delete-post-form">Delete Post</button>
+        </form>
+
+        </div>
+
+        <h1 class="blog-title text-center">{{ post.title }}</h1>
+        <h6 class="blog-meta text-center">{{ post.date_published }} by {{ post.author }}</h6>
+
+        <div class="container markdown">{{ post.content|markdown }}</div>
+
+        </div>
+    </div>
+</div>
+
+{% include "info/footer.html" %}

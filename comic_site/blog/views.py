@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from info.models import Info
 from .models import Post
-from .forms import AddPost, ChangePost
+from .forms import AddPost, ChangePost, DeletePost
 from django.http import Http404
 
 # The landing page of the blog
@@ -103,10 +103,74 @@ def add(request):
 
     return render(request, 'blog/add.html', context)
 
-def change(request):
-    context = {}
+def change(request, post_id):
+    if not request.user.is_authenticated or not request.user.has_perm('blog.change_post'):
+        raise Http404
+
+    post = get_object_or_404(Post, pk=post_id)
+
+    if request.method == "POST":
+        form = ChangePost(request.POST, instance=post)
+
+        if not form.is_valid():
+            # Prepares the context for the page
+            info = Info.objects.order_by('site_name')[0]
+            context = {
+                'info': info,
+                'user_logged_in': True,
+                'form': form,
+            }
+
+            return render(request, 'blog/change.html', context)
+
+        form.save()
+        return redirect('blog:single', post_id=post_id)
+    
+    info = Info.objects.order_by('site_name')[0]
+    form = ChangePost(instance=post)
+
+    # Prepares the context for the page
+    context = {
+        'info': info,
+        'user_logged_in': True,
+        'form': form,
+    }
+
     return render(request, 'blog/change.html', context)
 
-def delete(request):
-    context = {}
+def delete(request, post_id):
+    if not request.user.is_authenticated or not request.user.has_perm('blog.delete_post'):
+        raise Http404
+
+    post = get_object_or_404(Post, pk=post_id)
+
+    if request.method == "POST":
+        form = DeletePost(request.POST)
+
+        if not form.is_valid():
+            # Prepares the context for the page
+            info = Info.objects.order_by('site_name')[0]
+            context = {
+                'info': info,
+                'user_logged_in': True,
+                'form': form,
+                'post': post,
+            }
+
+            return render(request, 'blog/delete.html', context)
+
+        post.delete()
+        return redirect('blog:index')
+    
+    info = Info.objects.order_by('site_name')[0]
+    form = DeletePost()
+
+    # Prepares the context for the page
+    context = {
+        'info': info,
+        'user_logged_in': True,
+        'form': form,
+        'post': post,
+    }
+
     return render(request, 'blog/delete.html', context)

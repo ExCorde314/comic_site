@@ -6,10 +6,10 @@
 
         <div class="container">
 
-        <form id="add-comic-form" enctype="multipart/form-data" method="post" name="add_comic" class="add-comic-form center-align">
+        <form id="change-comic-form" method="post" name="add_comic" class="change-comic-form center-align">
             {% csrf_token %}
 
-            <h1 class="comic-title text-center">Add New Comic</h1>
+            <h1 class="comic-title text-center">Change Comic</h1>
 
             {% if form.non_field_errors %}
             <div class="text-center">
@@ -28,15 +28,13 @@
             <label for="{{ form.alt_text.id_for_label }}">{{ form.alt_text.label }}</label>
             <input type="text" id="{{ form.alt_text.id_for_label }}" name="{{ form.alt_text.html_name }}" {% if form.alt_text.value%} value="{{ form.alt_text.value }}" {% endif %} class="form-control {% if form.alt_text.errors %} is-invalid {% endif %}" placeholder="Alt Text">
             {% if form.alt_text.errors %}<div class="invalid-feedback">{{ form.alt_text.errors }}</div>{% endif %}
-
-            <label for="{{ form.image.id_for_label }}">{{ form.image.label }}</label>
-            <input type="file" id="{{ form.image.id_for_label }}" name="{{ form.image.html_name }}" class="form-control {% if form.image.errors %} is-invalid {% endif %}">
-            {% if form.image.errors %}<div class="invalid-feedback">{{ form.image.errors }}</div>{% endif %}
             
-            <button class="btn form-btn" type="submit" form="add-comic-form">Add Comic</button>
+            <button class="btn form-btn" type="submit" form="change-comic-form">Change Comic</button>
         </form>
 
         </div>
+
+        <img class="comic" src="{{ comic.image.url }}" title="{{ comic.title_text }}" alt="{{ comic.alt_text }}" />
 
         </div>
     </div>

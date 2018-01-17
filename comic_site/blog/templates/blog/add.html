@@ -26,7 +26,7 @@
             {% if form.author.errors %}<div class="invalid-feedback">{{ form.author.errors }}</div>{% endif %}
 
             <label for="{{ form.content.id_for_label }}">{{ form.content.label }}</label>
-            <textarea id="{{ form.content.id_for_label }}" name="{{ form.content.html_name }}" {% if form.content.value %} value="{{ form.content.value }}" {% endif %} class="form-control {% if form.content.errors %} is-invalid {% endif %}" placeholder="Content" rows="10"></textarea>
+            <textarea id="{{ form.content.id_for_label }}" name="{{ form.content.html_name }}" class="form-control {% if form.content.errors %} is-invalid {% endif %}" placeholder="Content" rows="10">{% if form.content.value %}{{ form.content.value }}{% endif %}</textarea>
             {% if form.content.errors %}<div class="invalid-feedback">{{ form.content.errors }}</div>{% endif %}
 
             <button class="btn form-btn" type="submit" form="add-post-form">Add Post</button>
