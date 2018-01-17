@@ -1,10 +1,19 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
-
+from django.http import Http404
 from .forms import LoginForm
+from info.models import Info
 
 def admin_panel(request):
-    context = {}
+    if not request.user.is_authenticated:
+        raise Http404
+
+    info = Info.objects.order_by('site_name')[0]
+
+    context = {
+        'info': info,
+        'user_logged_in': True,
+    }
     return render(request, 'admin/admin_panel.html', context)
 
 # login page

@@ -1,5 +1,5 @@
 comic-site:
-    image: excorde314/comic-site:1.1
+    image: excorde314/comic-site:1.2
     container_name: comic-site
     external_links:
       -  mysql:db
@@ -14,4 +14,6 @@ comic-site:
                       mod_wsgi-express start-server --url-alias /static /app/static
                                                     --url-alias /media /app/media
                                                     --working-directory /app
-                                                    --reload-on-changes /app/comic_site/wsgi.py"
+                                                    --reload-on-changes /app/comic_site/wsgi.py
+                                                    --compress-responses
+                                                    --include-file /app/additional_rules.conf"

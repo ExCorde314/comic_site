@@ -11,6 +11,8 @@ def custom_404(request):
         'info404': info404,
     }
 
+    response.status_code = 404
+
     return render(request, 'info/404_page.html', context)
 
 # 500 error page
@@ -22,6 +24,8 @@ def custom_500(request):
         'info': info,
         'info500': info500,
     }
+
+    response.status_code = 500
 
     return render(request, 'info/500_page.html', context)
 
@@ -35,6 +39,8 @@ def custom_403(request):
         'info403': info403,
     }
 
+    response.status_code = 403
+
     return render(request, 'info/403_page.html', context)
 
 # 400 error page
@@ -46,5 +52,7 @@ def custom_400(request):
         'info': info,
         'info400': info400,
     }
+
+    response.status_code = 400
 
     return render(request, 'info/400_page.html', context)

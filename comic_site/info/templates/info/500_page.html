@@ -1,8 +1,8 @@
-{% include "info/header.html" %}
+{% include "info/header.html" with site_title="500 Error" %}
 
 <div class="col s12">
 
-<div class="comic-container center-align">
+<div class="comic-container text-center">
     <h2 class="comic-title">{{ info500.title }}</h2>
 
     <img class="comic" src="{{ info500.image.url }}" alt="{{ info500.alt_text }}"
