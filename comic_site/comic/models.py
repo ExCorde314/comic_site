@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 # Models
 class Comic(models.Model):
@@ -11,3 +12,6 @@ class Comic(models.Model):
 
     def __str__(self):
         return str(self.id)+ ': ' + self.title + ' : ' + str(self.date_published.date())
+
+    def get_absolute_url(self):
+        return reverse('comic:single', args=[self.id])

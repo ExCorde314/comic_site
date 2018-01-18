@@ -1,4 +1,12 @@
-[  
+[
+   {  
+      "model":"sites.site",
+      "pk":1,
+      "fields":{  
+         "domain":"comediccat.com",
+         "name":"comediccat.com"
+      }
+   },  
    {  
       "model":"comic.comic",
       "pk":1,
