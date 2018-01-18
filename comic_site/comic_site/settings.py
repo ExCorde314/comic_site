@@ -25,7 +25,7 @@ SECRET_KEY = '=ktg&2xl)ce@dumf8h3%sqevh1qg+wat%oyy(658zy4-g!wl3y'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['comediccat.com', 'localhost']
 
 
 # Application definition

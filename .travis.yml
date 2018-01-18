@@ -1,8 +1,11 @@
+dist: trusty
 language: python
 python: 3.5.4
 sudo: required
 services:
   - docker
+addons:
+  chrome: stable
 
 env:
   - DJANGO_VERSION=1.10
@@ -11,12 +14,15 @@ before_script:
   - docker pull mysql:5.7.14
   - docker create --name mysql -e MYSQL\_ROOT\_PASSWORD='$3cureUS' mysql:5.7.14
   - docker start mysql
+  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost:8000 &
+  - pip install selenium
   - sleep 20
   - docker run -i --name mysql-cmdline --link mysql:db mysql:5.7.14 bash -c "mysql -uroot -p'\$3cureUS' -h db" <<< "create user 'www'@'%' identified by '\$3cureUS';\n create database comic_site character set utf8;\n grant all on comic_site.* to 'www'@'%';\n grant all on test_comic_site.* to 'www'@'%';\n"
   - docker-compose up -d
 
 script:
   - docker exec -it comic-site bash -c "python manage.py test"
+  - python selenium_tests.py
 
 after_script:
   - docker-compose down
