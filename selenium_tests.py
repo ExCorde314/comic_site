@@ -12,7 +12,7 @@ class Comic(unittest.TestCase):
         options = webdriver.ChromeOptions()
         options.add_argument('--headless')
         options.add_argument('--disable-gpu')
-        self.driver = webdriver.Chrome('./chromedriver', chrome_options=options) #Remote(
+        self.driver = webdriver.Chrome('./chromedriver', options=options) #Remote(
                         # command_executor='http://localhost:9222',
                         # desired_capabilities=DesiredCapabilities.CHROME
                 # )

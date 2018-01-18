@@ -18,6 +18,7 @@ before_script:
 
 script:
   - docker exec -it comic-site bash -c "python manage.py test"
+  # - curl "http://localhost:8000"
   - chmod 777 chromedriver
   - python selenium_tests.py
 
