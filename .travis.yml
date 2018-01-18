@@ -7,9 +7,6 @@ services:
 addons:
   chrome: stable
 
-env:
-  - DJANGO_VERSION=2.0
-
 before_script:
   - docker pull mysql:5.7.14
   - docker create --name mysql -e MYSQL\_ROOT\_PASSWORD='$3cureUS' mysql:5.7.14
@@ -21,6 +18,7 @@ before_script:
 
 script:
   - docker exec -it comic-site bash -c "python manage.py test"
+  - chmod 777 chromedriver
   - python selenium_tests.py
 
 after_script:
