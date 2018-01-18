@@ -1,4 +1,4 @@
-from django.urls import include, path
+from django.urls import include, path, reverse
 from django.contrib import admin
 from django.http import HttpResponse
 from django.contrib.sitemaps.views import sitemap
@@ -16,7 +16,7 @@ urlpatterns = [
     path('', include('comic.urls')),
     path('blog/', include('blog.urls')),
     path('access-portal/', include('admin.urls')),
-    path('robots.txt', lambda r: HttpResponse("User-Agent: *\nDisallow:", content_type="text/plain"), name="robots_txt"),
+    path('robots.txt', lambda r: HttpResponse('Sitemap: ' + reverse('django.contrib.sitemaps.views.sitemap') + "\nUser-Agent: *\nDisallow:", content_type="text/plain"), name="robots_txt"),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
 ]
 
