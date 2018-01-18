@@ -7,10 +7,10 @@ WEB_URL = "http://localhost:8000/"
 
 class Comic(unittest.TestCase):
     def setUp(self):
-        self.driver = webdriver.Remote(
-                        command_executor='http://localhost:9222/wd/hub',
-                        desired_capabilities=DesiredCapabilities.CHROME
-                )
+        self.driver = webdriver.Chrome() #Remote(
+                        # command_executor='http://localhost:9222',
+                        # desired_capabilities=DesiredCapabilities.CHROME
+                # )
 
     def test_home_page(self):
         driver = self.driver
