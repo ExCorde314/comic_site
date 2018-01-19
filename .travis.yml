@@ -19,10 +19,14 @@ before_script:
 script:
   - docker exec -it comic-site bash -c "python manage.py test"
   - docker ps
+  - curl "http://localhost:8000"
+  - docker ps
+  - curl "http://127.0.0.1:8000"
+  - docker ps
   - chmod 777 selenium_tests/chromedriver
   - docker ps
   - python selenium_tests/selenium_tests.py --driver='selenium_tests/chromedriver'
   - docker ps
-  
+
 after_script:
   - docker-compose down
