@@ -11,6 +11,7 @@ comic-site:
                       python manage.py makemigrations blog comic info admin --noinput &&
                       python manage.py migrate --noinput &&
                       python manage.py loaddata /app/fixtures/db.json &&
+                      python manage.py loaddata /app/fixtures/test_fixtures.json &&
                       mod_wsgi-express start-server --url-alias /static /app/static
                                                     --url-alias /media /app/media
                                                     --working-directory /app

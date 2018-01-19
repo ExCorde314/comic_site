@@ -439,6 +439,7 @@ if __name__ == "__main__":
     # Adds 2 users to the site
     driver = get_web_driver()
     driver.get(WEB_URL + 'access-portal/signup')
+    print(driver.page_source)
     element = driver.find_element_by_id("id_first_name")
     element.clear()
     element.send_keys("Jonathan")
