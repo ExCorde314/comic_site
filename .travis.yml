@@ -18,9 +18,8 @@ before_script:
 
 script:
   - docker exec -it comic-site bash -c "python manage.py test"
-  # - curl "http://localhost:8000"
   - chmod 777 chromedriver
-  - python selenium_tests.py
+  - python selenium_tests.py --env=travis
 
 after_script:
   - docker-compose down
