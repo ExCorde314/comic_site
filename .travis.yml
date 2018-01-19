@@ -18,8 +18,11 @@ before_script:
 
 script:
   - docker exec -it comic-site bash -c "python manage.py test"
+  - docker ps
   - chmod 777 selenium_tests/chromedriver
+  - docker ps
   - python selenium_tests/selenium_tests.py --driver='selenium_tests/chromedriver'
-
+  - docker ps
+  
 after_script:
   - docker-compose down
