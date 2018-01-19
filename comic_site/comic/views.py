@@ -12,7 +12,7 @@ def index(request):
     # Gets the latest and first comics
     comic = Comic.objects.filter(date_published__isnull=False).latest('date_published')
     earliest = Comic.objects.filter(date_published__isnull=False).earliest('date_published')
-    info = Info.objects.order_by('site_name')[0]
+    info = Info.load()
 
     # Gets the next and previous comic
     try:
@@ -46,7 +46,7 @@ def single(request, comic_id):
     # Gets the current comic and the first comic
     comic = get_object_or_404(Comic, pk=comic_id)
     earliest = Comic.objects.filter(date_published__isnull=False).earliest('date_published')
-    info = Info.objects.order_by('site_name')[0]
+    info = Info.load()
 
     # Gets the next and previous comic
     try:
@@ -80,7 +80,7 @@ def add(request):
 
         if not form.is_valid():
             # Prepares the context for the page
-            info = Info.objects.order_by('site_name')[0]
+            info = Info.load()
             context = {
                 'info': info,
                 'user_logged_in': True,
@@ -93,7 +93,7 @@ def add(request):
         return redirect('admin:admin-panel')
 
 
-    info = Info.objects.order_by('site_name')[0]
+    info = Info.load()
     form = AddComic()
 
     # Prepares the context for the page
@@ -116,7 +116,7 @@ def change(request, comic_id):
 
         if not form.is_valid():
             # Prepares the context for the page
-            info = Info.objects.order_by('site_name')[0]
+            info = Info.load()
             context = {
                 'info': info,
                 'user_logged_in': True,
@@ -129,7 +129,7 @@ def change(request, comic_id):
         form.save()
         return redirect('comic:single', comic_id=comic_id)
 
-    info = Info.objects.order_by('site_name')[0]
+    info = Info.load()
     form = ChangeComic(instance=comic)
 
     # Prepares the context for the page
@@ -153,7 +153,7 @@ def delete(request, comic_id):
 
         if not form.is_valid():
             # Prepares the context for the page
-            info = Info.objects.order_by('site_name')[0]
+            info = Info.load()
             context = {
                 'info': info,
                 'user_logged_in': True,
@@ -166,7 +166,7 @@ def delete(request, comic_id):
         comic.delete()
         return redirect('comic:index')
     
-    info = Info.objects.order_by('site_name')[0]
+    info = Info.load()
     form = DeleteComic()
 
     # Prepares the context for the page

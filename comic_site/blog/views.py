@@ -12,7 +12,7 @@ def index(request):
     # Gets the latest and first blog posts
     post = Post.objects.filter(date_published__isnull=False).latest('date_published')
     earliest = Post.objects.filter(date_published__isnull=False).earliest('date_published')
-    info = Info.objects.order_by('site_name')[0]
+    info = Info.load()
 
     # Gets the next and previous post
     try:
@@ -45,7 +45,7 @@ def single(request, post_id):
     # Gets the current post and the first post
     post = get_object_or_404(Post, pk=post_id)
     earliest = Post.objects.filter(date_published__isnull=False).earliest('date_published')
-    info = Info.objects.order_by('site_name')[0]
+    info = Info.load()
 
     # Gets the next and previous post
     try:
@@ -79,7 +79,7 @@ def add(request):
 
         if not form.is_valid():
             # Prepares the context for the page
-            info = Info.objects.order_by('site_name')[0]
+            info = Info.load()
             context = {
                 'info': info,
                 'user_logged_in': True,
@@ -91,7 +91,7 @@ def add(request):
         form.save()
         return redirect('blog:index')
     
-    info = Info.objects.order_by('site_name')[0]
+    info = Info.load()
     form = AddPost()
 
     # Prepares the context for the page
@@ -114,7 +114,7 @@ def change(request, post_id):
 
         if not form.is_valid():
             # Prepares the context for the page
-            info = Info.objects.order_by('site_name')[0]
+            info = Info.load()
             context = {
                 'info': info,
                 'user_logged_in': True,
@@ -126,7 +126,7 @@ def change(request, post_id):
         form.save()
         return redirect('blog:single', post_id=post_id)
     
-    info = Info.objects.order_by('site_name')[0]
+    info = Info.load()
     form = ChangePost(instance=post)
 
     # Prepares the context for the page
@@ -149,7 +149,7 @@ def delete(request, post_id):
 
         if not form.is_valid():
             # Prepares the context for the page
-            info = Info.objects.order_by('site_name')[0]
+            info = Info.load()
             context = {
                 'info': info,
                 'user_logged_in': True,
@@ -162,7 +162,7 @@ def delete(request, post_id):
         post.delete()
         return redirect('blog:index')
     
-    info = Info.objects.order_by('site_name')[0]
+    info = Info.load()
     form = DeletePost()
 
     # Prepares the context for the page

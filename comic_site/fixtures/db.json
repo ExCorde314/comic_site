@@ -82,10 +82,9 @@
       "model":"info.info",
       "pk":1,
       "fields":{  
-         "site_name":"Comedic Cat",
-         "charset":"utf-8",
          "logo":"logo.png",
-         "about":"This comic is about ordinary, intriguing, and downright strange things and contains some interesting characters."
+         "about":"This comic is about ordinary, intriguing, and downright strange things and contains some interesting characters.",
+         "about_page":"# About this comic"
       }
    },
    {  

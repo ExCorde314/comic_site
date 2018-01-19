@@ -20,10 +20,9 @@ class SingletonModel(models.Model):
 
 # A singleton class that contains site-wide information
 class Info(SingletonModel):
-    site_name = models.CharField(max_length=200, default=" ")
-    charset = models.CharField(max_length=200, default=" ")
     logo = models.ImageField(upload_to='images')
     about = models.CharField(max_length=200, default="This comic is about ordinary, scientific, mathmatical, intriguing, and downright strange things and contains some interesting characters.")
+    about_page = models.TextField(default="# About This Comic")
 
 # A singleton class that contains 400 error page information
 class Info400(SingletonModel):

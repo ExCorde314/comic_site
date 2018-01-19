@@ -12,7 +12,7 @@ def admin_panel(request):
     if not request.user.is_authenticated:
         raise Http404
 
-    info = Info.objects.order_by('site_name')[0]
+    info = Info.load()
 
     context = {
         'info': info,

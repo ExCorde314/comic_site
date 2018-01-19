@@ -89,7 +89,7 @@ class AdminSignupTest(unittest.TestCase):
         element.send_keys("password")
         element.send_keys(Keys.RETURN)
 
-        assert WEB_URL + 'access-portal/admin-panel' == driver.current_url
+        assert WEB_URL + 'access-portal/' == driver.current_url
 
     def test_signup_invalid_form_1(self):
         driver = self.driver
