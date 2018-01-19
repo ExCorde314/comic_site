@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, logout
+from django.contrib.auth import authenticate
+from django.contrib.auth import logout as logout_site
 from django.contrib.auth import login as loginto_site
 from django.contrib.auth.models import User, Permission
 from django.http import Http404
@@ -120,5 +121,5 @@ def signup(request):
 
 # logout page
 def logout(request):
-    logout(request)
+    logout_site(request)
     return redirect('comic:index')
