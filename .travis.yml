@@ -15,11 +15,11 @@ before_script:
   - sleep 20
   - docker run -i --name mysql-cmdline --link mysql:db mysql:5.7.14 bash -c "mysql -uroot -p'\$3cureUS' -h db" <<< "create user 'www'@'%' identified by '\$3cureUS';\n create database comic_site character set utf8;\n grant all on comic_site.* to 'www'@'%';\n grant all on test_comic_site.* to 'www'@'%';\n"
   - docker-compose up -d
-  - docker stop comic-site
+  # - docker stop comic-site
 
 script:
-  - docker wait comic-site
-  - docker start comic-site
+  # - docker wait comic-site
+  # - docker start comic-site
   - docker exec -it comic-site bash -c "python manage.py test"
   - docker exec -it comic-site bash -c "python manage.py loaddata /app/fixtures/test_fixtures.json"
   - chmod 777 ./selenium_tests/chromedriver
