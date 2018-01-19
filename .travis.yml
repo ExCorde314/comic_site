@@ -1,7 +1,7 @@
 dist: trusty
 language: python
 python: 3.5.4
-# sudo: required
+sudo: required
 services:
   - docker
 addons:
@@ -18,8 +18,8 @@ before_script:
 
 script:
   - docker exec -it comic-site bash -c "python manage.py test"
-  - chmod 777 /app/selenium_tests/chromedriver
-  - python /app/selenium_tests/selenium_tests.py --driver='/app/selenium_tests/chromedriver'
+  - chmod 777 selenium_tests/chromedriver
+  - python selenium_tests/selenium_tests.py --driver='selenium_tests/chromedriver'
 
 after_script:
   - docker-compose down
