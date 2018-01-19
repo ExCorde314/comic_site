@@ -20,6 +20,7 @@ before_script:
 script:
   # - docker wait comic-site
   # - docker start comic-site
+  - curl localhost:8000
   - docker exec -it comic-site bash -c "python manage.py test"
   - docker exec -it comic-site bash -c "python manage.py loaddata /app/fixtures/test_fixtures.json"
   - chmod 777 ./selenium_tests/chromedriver
