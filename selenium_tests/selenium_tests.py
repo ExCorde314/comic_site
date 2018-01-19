@@ -14,6 +14,20 @@ def get_web_driver():
     options.add_argument('--disable-gpu')
     return webdriver.Chrome(DRIVER_LOC, options=options)
 
+def login(driver, username, password):
+    driver.get(WEB_URL + 'access-portal/login')
+    assert 'Log In' in driver.page_source
+    assert 'form-signin' in driver.page_source
+    element = driver.find_element_by_id("id_username")
+    element.clear()
+    element.send_keys(username)
+    element = driver.find_element_by_id("id_password")
+    element.clear()
+    element.send_keys(password)
+    element.send_keys(Keys.RETURN)
+
+    assert WEB_URL + 'access-portal/' == driver.current_url
+
 class ComicTest(unittest.TestCase):
     def setUp(self):
         self.driver = get_web_driver()
@@ -30,6 +44,66 @@ class ComicTest(unittest.TestCase):
         assert "Comedic Cat: " in driver.page_source
         assert "comic-container" in driver.page_source
         assert 'Finding A Hat' in driver.page_source
+
+    def test_access_add(self):
+        driver = self.driver
+        login(driver, "ExCorde314", "password")
+        driver.get(WEB_URL + 'add')
+
+        assert "Add New Comic" in driver.page_source
+
+    def test_bad_access_add_1(self):
+        driver = self.driver
+        login(driver, "NoPerm", "password")
+        driver.get(WEB_URL + 'add')
+
+        assert "404 Page Not Found" in driver.page_source  or "Page not found" in driver.page_source
+
+    def test_bad_access_add_2(self):
+        driver = self.driver
+        driver.get(WEB_URL + 'add')
+
+        assert "404 Page Not Found" in driver.page_source  or "Page not found" in driver.page_source
+
+    def test_access_change(self):
+        driver = self.driver
+        login(driver, "ExCorde314", "password")
+        driver.get(WEB_URL + 'change/1')
+
+        assert "Change Comic" in driver.page_source
+
+    def test_bad_access_change_1(self):
+        driver = self.driver
+        login(driver, "NoPerm", "password")
+        driver.get(WEB_URL + 'change/1')
+
+        assert "404 Page Not Found" in driver.page_source  or "Page not found" in driver.page_source
+
+    def test_bad_access_change_2(self):
+        driver = self.driver
+        driver.get(WEB_URL + 'change/1')
+
+        assert "404 Page Not Found" in driver.page_source  or "Page not found" in driver.page_source
+
+    def test_access_delete(self):
+        driver = self.driver
+        login(driver, "ExCorde314", "password")
+        driver.get(WEB_URL + 'delete/1')
+
+        assert "Delete Comic" in driver.page_source
+
+    def test_bad_access_delete_1(self):
+        driver = self.driver
+        login(driver, "NoPerm", "password")
+        driver.get(WEB_URL + 'delete/1')
+
+        assert "404 Page Not Found" in driver.page_source  or "Page not found" in driver.page_source
+
+    def test_bad_access_delete_2(self):
+        driver = self.driver
+        driver.get(WEB_URL + 'delete/1')
+
+        assert "404 Page Not Found" in driver.page_source  or "Page not found" in driver.page_source
 
     def tearDown(self):
         self.driver.quit()
@@ -50,6 +124,66 @@ class BlogTest(unittest.TestCase):
         assert "Comedic Cat: " in driver.page_source
         assert "blog-container" in driver.page_source
         assert 'Hello World!' in driver.page_source
+
+    def test_access_add(self):
+        driver = self.driver
+        login(driver, "ExCorde314", "password")
+        driver.get(WEB_URL + 'blog/add')
+
+        assert "Add New Post" in driver.page_source
+
+    def test_bad_access_add_1(self):
+        driver = self.driver
+        login(driver, "NoPerm", "password")
+        driver.get(WEB_URL + 'blog/add')
+
+        assert "404 Page Not Found" in driver.page_source or "Page not found" in driver.page_source
+
+    def test_bad_access_add_2(self):
+        driver = self.driver
+        driver.get(WEB_URL + 'blog/add')
+
+        assert "404 Page Not Found" in driver.page_source  or "Page not found" in driver.page_source
+
+    def test_access_change(self):
+        driver = self.driver
+        login(driver, "ExCorde314", "password")
+        driver.get(WEB_URL + 'blog/change/1')
+
+        assert "Change Post" in driver.page_source
+
+    def test_bad_access_change_1(self):
+        driver = self.driver
+        login(driver, "NoPerm", "password")
+        driver.get(WEB_URL + 'blog/change/1')
+
+        assert "404 Page Not Found" in driver.page_source  or "Page not found" in driver.page_source
+
+    def test_bad_access_change_2(self):
+        driver = self.driver
+        driver.get(WEB_URL + 'blog/change/1')
+
+        assert "404 Page Not Found" in driver.page_source  or "Page not found" in driver.page_source
+
+    def test_access_delete(self):
+        driver = self.driver
+        login(driver, "ExCorde314", "password")
+        driver.get(WEB_URL + 'blog/delete/1')
+
+        assert "Delete Post" in driver.page_source
+
+    def test_bad_access_delete_1(self):
+        driver = self.driver
+        login(driver, "NoPerm", "password")
+        driver.get(WEB_URL + 'blog/delete/1')
+
+        assert "404 Page Not Found" in driver.page_source  or "Page not found" in driver.page_source
+
+    def test_bad_access_delete_2(self):
+        driver = self.driver
+        driver.get(WEB_URL + 'blog/delete/1')
+
+        assert "404 Page Not Found" in driver.page_source  or "Page not found" in driver.page_source
 
     def tearDown(self):
         self.driver.quit()
@@ -279,6 +413,19 @@ class AdminLoginTest(unittest.TestCase):
     def tearDown(self):
         self.driver.quit()
 
+class StaticTest(unittest.TestCase):
+    def setUp(self):
+        self.driver = get_web_driver()
+
+    def test_about_page(self):
+        driver = self.driver
+        driver.get(WEB_URL + 'about')
+        assert 'About This Comic' in driver.page_source
+        assert 'container markdown' in driver.page_source
+        
+    def tearDown(self):
+        self.driver.quit()
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--driver', default='./chromedriver.exe')
@@ -288,5 +435,52 @@ if __name__ == "__main__":
     DRIVER_LOC = args.driver
 
     sys.argv[1:] = args.unittest_args
+
+    # Adds 2 users to the site
+    driver = get_web_driver()
+    driver.get(WEB_URL + 'access-portal/signup')
+    element = driver.find_element_by_id("id_first_name")
+    element.clear()
+    element.send_keys("Jonathan")
+    element = driver.find_element_by_id("id_last_name")
+    element.clear()
+    element.send_keys("Lowe")
+    element = driver.find_element_by_id("id_email")
+    element.clear()
+    element.send_keys("jonathanglowe@gmail.com")
+    element = driver.find_element_by_id("id_username")
+    element.clear()
+    element.send_keys("ExCorde314")
+    element = driver.find_element_by_id("id_password1")
+    element.clear()
+    element.send_keys("password")
+    element = driver.find_element_by_id("id_password2")
+    element.clear()
+    element.send_keys("password")
+    element.send_keys(Keys.RETURN)
+    driver.quit()
+
+    driver = get_web_driver()
+    driver.get(WEB_URL + 'access-portal/signup')
+    element = driver.find_element_by_id("id_first_name")
+    element.clear()
+    element.send_keys("Joe")
+    element = driver.find_element_by_id("id_last_name")
+    element.clear()
+    element.send_keys("NoPerm")
+    element = driver.find_element_by_id("id_email")
+    element.clear()
+    element.send_keys("nopermjoe@gmail.com")
+    element = driver.find_element_by_id("id_username")
+    element.clear()
+    element.send_keys("NoPerm")
+    element = driver.find_element_by_id("id_password1")
+    element.clear()
+    element.send_keys("password")
+    element = driver.find_element_by_id("id_password2")
+    element.clear()
+    element.send_keys("password")
+    element.send_keys(Keys.RETURN)
+    driver.quit()
 
     unittest.main()

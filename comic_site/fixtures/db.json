@@ -1,4 +1,11 @@
 [
+   {
+      "model": "info.about",
+      "pk": 1,
+      "fields":{
+         "page_contents": "This Comic"
+      }
+   }, 
    {  
       "model":"sites.site",
       "pk":1,

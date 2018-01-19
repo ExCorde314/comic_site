@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Info, Info404, Info500
+from .models import Info, Info404, Info500, About
 
 # About the comic page.
 def about(request):
@@ -7,9 +7,11 @@ def about(request):
     user_logged_in = request.user.is_authenticated
 
     info = Info.load()
+    about = About.load()
 
     context = {
         'info': info,
+        'about': about,
         'user_logged_in': user_logged_in,
     }
 
