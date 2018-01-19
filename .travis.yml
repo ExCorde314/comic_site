@@ -10,20 +10,19 @@ addons:
 before_script:
   - docker pull mysql:5.7.14
   - pip install selenium
-  - chmod 777 ./selenium_tests/chromedriver
   - docker create --name mysql -e MYSQL\_ROOT\_PASSWORD='$3cureUS' mysql:5.7.14
   - docker start mysql
   - sleep 20
   - docker run -i --name mysql-cmdline --link mysql:db mysql:5.7.14 bash -c "mysql -uroot -p'\$3cureUS' -h db" <<< "create user 'www'@'%' identified by '\$3cureUS';\n create database comic_site character set utf8;\n grant all on comic_site.* to 'www'@'%';\n grant all on test_comic_site.* to 'www'@'%';\n"
   - docker-compose up -d
   - docker stop comic-site
-  - docker wait comic-site
-  - docker start comic-site
-  - sleep 20
-  - docker exec -it comic-site bash -c "python manage.py loaddata /app/fixtures/test_fixtures.json"
 
 script:
+  - docker wait comic-site
+  - docker start comic-site
   - docker exec -it comic-site bash -c "python manage.py test"
+  - docker exec -it comic-site bash -c "python manage.py loaddata /app/fixtures/test_fixtures.json"
+  - chmod 777 ./selenium_tests/chromedriver
   - python selenium_tests/selenium_tests.py --driver='./selenium_tests/chromedriver'
 
 after_script:
