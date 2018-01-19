@@ -73,7 +73,7 @@
          "post_change":true,
          "post_delete":true,
          "user_add":true,
-         "user_chage":true,
+         "user_change":true,
          "user_delete":true,
          "info_change":true
       }

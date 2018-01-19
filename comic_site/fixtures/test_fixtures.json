@@ -1,0 +1,19 @@
+[
+   {  
+      "model":"admin.registerauth",
+      "pk":1,
+      "fields":{  
+         "email":"comediccatcomic@gmail.com",
+         "comic_add":true,
+         "comic_change":true,
+         "comic_delete":true,
+         "post_add":true,
+         "post_change":true,
+         "post_delete":true,
+         "user_add":true,
+         "user_change":true,
+         "user_delete":true,
+         "info_change":true
+      }
+   }
+]
