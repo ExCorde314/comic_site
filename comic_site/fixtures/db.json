@@ -90,8 +90,7 @@
       "pk":1,
       "fields":{  
          "logo":"logo.png",
-         "about":"This comic is about ordinary, intriguing, and downright strange things and contains some interesting characters.",
-         "about_page":"# About this comic"
+         "about":"This comic is about ordinary, intriguing, and downright strange things and contains some interesting characters."
       }
    },
    {  
