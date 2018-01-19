@@ -13,6 +13,6 @@ class RegisterAuth(models.Model):
     post_change = models.BooleanField(default=False)
     post_delete = models.BooleanField(default=False)
     user_add = models.BooleanField(default=False)
-    user_chage = models.BooleanField(default=False)
+    user_change = models.BooleanField(default=False)
     user_delete = models.BooleanField(default=False)
     info_change = models.BooleanField(default=False)

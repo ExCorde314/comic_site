@@ -6,17 +6,13 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 WEB_URL = "http://localhost:8000/"
-
-TRAVIS = False
+DRIVER_LOC = './chromedriver.exe'
 
 def get_web_driver():
     options = webdriver.ChromeOptions()
     options.add_argument('--headless')
     options.add_argument('--disable-gpu')
-    if TRAVIS:
-        return webdriver.Chrome('./chromedriver', options=options)
-    else:
-        return webdriver.Chrome('./chromedriver.exe', options=options)
+    return webdriver.Chrome(DRIVER_LOC, options=options)
 
 class ComicTest(unittest.TestCase):
     def setUp(self):
@@ -61,14 +57,11 @@ class BlogTest(unittest.TestCase):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--env', default='non_travis')
+    parser.add_argument('--driver', default='./chromedriver.exe')
     parser.add_argument('unittest_args', nargs='*')
     args = parser.parse_args()
 
-    if args.env == 'travis':
-        TRAVIS = True
-    else:
-        TRAVIS = False
+    DRIVER_LOC = args.driver
 
     sys.argv[1:] = args.unittest_args
 

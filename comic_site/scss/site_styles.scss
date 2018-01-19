@@ -151,6 +151,14 @@ footer {
     border: 2px solid black;
 }
 
+.signup-container {
+    background-color: white;
+    width: 100%;
+    padding: 30px 20px;
+    margin: 40px 0px 40px 0px;
+    border: 2px solid black;
+}
+
 .blog-nav {
     margin: 40px 0px 10px 0px;
 
@@ -235,6 +243,12 @@ footer {
     height: 50px;
     line-height: 50px;
     background-color: rgba(51,51,51,0.08);
+}
+
+@include media-breakpoint-down(md) {
+    .nav-item {
+        padding-bottom: 7px; 
+    }
 }
 
 @include media-breakpoint-up(sm) {
