@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.utils import timezone
 
 # Models
 class Comic(models.Model):
@@ -8,7 +9,7 @@ class Comic(models.Model):
     image = models.ImageField(upload_to=".")
     title_text = models.CharField(max_length=200, default=" ")
     alt_text = models.CharField(max_length=200, default=" ")
-    date_published = models.DateTimeField(auto_now_add=True)
+    date_published = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return str(self.id)+ ': ' + self.title + ' : ' + str(self.date_published.date())

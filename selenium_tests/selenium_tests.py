@@ -65,6 +65,12 @@ class ComicTest(unittest.TestCase):
 
         assert "404 Page Not Found" in driver.page_source  or "Page not found" in driver.page_source
 
+    def test_add_success(self):
+        pass
+
+    def test_add_bad_1(self):
+        pass
+
     def test_access_change(self):
         driver = self.driver
         login(driver, "ExCorde314", "password")
@@ -85,6 +91,12 @@ class ComicTest(unittest.TestCase):
 
         assert "404 Page Not Found" in driver.page_source  or "Page not found" in driver.page_source
 
+    def test_change_success(self):
+        pass
+
+    def test_change_bad_1(self):
+        pass
+
     def test_access_delete(self):
         driver = self.driver
         login(driver, "ExCorde314", "password")
@@ -104,6 +116,9 @@ class ComicTest(unittest.TestCase):
         driver.get(WEB_URL + 'delete/1')
 
         assert "404 Page Not Found" in driver.page_source  or "Page not found" in driver.page_source
+
+    def test_delete_success(self):
+        pass
 
     def tearDown(self):
         self.driver.quit()
@@ -145,6 +160,12 @@ class BlogTest(unittest.TestCase):
 
         assert "404 Page Not Found" in driver.page_source  or "Page not found" in driver.page_source
 
+    def test_add_success(self):
+        pass
+
+    def test_add_bad_1(self):
+        pass
+
     def test_access_change(self):
         driver = self.driver
         login(driver, "ExCorde314", "password")
@@ -165,6 +186,12 @@ class BlogTest(unittest.TestCase):
 
         assert "404 Page Not Found" in driver.page_source  or "Page not found" in driver.page_source
 
+    def test_change_success(self):
+        pass
+
+    def test_change_bad_1(self):
+        pass
+
     def test_access_delete(self):
         driver = self.driver
         login(driver, "ExCorde314", "password")
@@ -184,6 +211,9 @@ class BlogTest(unittest.TestCase):
         driver.get(WEB_URL + 'blog/delete/1')
 
         assert "404 Page Not Found" in driver.page_source  or "Page not found" in driver.page_source
+
+    def test_delete_success(self):
+        pass
 
     def tearDown(self):
         self.driver.quit()
@@ -422,6 +452,9 @@ class StaticTest(unittest.TestCase):
         driver.get(WEB_URL + 'about')
         assert 'About This Comic' in driver.page_source
         assert 'container markdown' in driver.page_source
+
+    def test_about_page_edit(self):
+        pass
         
     def tearDown(self):
         self.driver.quit()
@@ -439,7 +472,7 @@ if __name__ == "__main__":
     # Adds 2 users to the site
     driver = get_web_driver()
     driver.get(WEB_URL + 'access-portal/signup')
-    print(driver.page_source)
+    # print(driver.page_source)
     element = driver.find_element_by_id("id_first_name")
     element.clear()
     element.send_keys("Jonathan")

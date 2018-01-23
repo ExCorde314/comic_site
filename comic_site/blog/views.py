@@ -70,6 +70,7 @@ def single(request, post_id):
     # Renders the result
     return render(request, 'blog/single.html', context)
 
+# Add blog post page
 def add(request):
     if not request.user.is_authenticated or not request.user.has_perm('blog.add_post'):
         raise Http404
@@ -103,6 +104,7 @@ def add(request):
 
     return render(request, 'blog/add.html', context)
 
+# Change blog post page
 def change(request, post_id):
     if not request.user.is_authenticated or not request.user.has_perm('blog.change_post'):
         raise Http404
@@ -138,6 +140,7 @@ def change(request, post_id):
 
     return render(request, 'blog/change.html', context)
 
+# Delete blog post page
 def delete(request, post_id):
     if not request.user.is_authenticated or not request.user.has_perm('blog.delete_post'):
         raise Http404

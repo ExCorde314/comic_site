@@ -168,6 +168,14 @@ footer {
     }
 }
 
+.table thead th, .table th, .table td {
+    border-color: $black;
+}
+
+.table-button-column {
+    width: 70px;
+}
+
 .main-content {
     width: 90%;
     padding: 0;

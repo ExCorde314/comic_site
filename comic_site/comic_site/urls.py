@@ -5,7 +5,7 @@ from django.contrib.sitemaps.views import sitemap
 from comic.sitemaps import ComicSitemap
 from blog.sitemaps import BlogSitemap
 from .sitemaps import StaticSitemap
-from info.views import about
+from info.views import about, about_edit, info_edit
 
 sitemaps = {
     'static': StaticSitemap(),
@@ -16,6 +16,8 @@ sitemaps = {
 urlpatterns = [
     path('', include('comic.urls')),
     path('about', about, name="about"),
+    path('about/edit', about_edit, name="about-edit"),
+    path('info/edit', info_edit, name="info-edit"),
     path('blog/', include('blog.urls')),
     path('access-portal/', include('admin.urls')),
     path('robots.txt', lambda r: HttpResponse('Sitemap: ' + reverse('django.contrib.sitemaps.views.sitemap') + "\nUser-Agent: *\nDisallow:", content_type="text/plain"), name="robots_txt"),

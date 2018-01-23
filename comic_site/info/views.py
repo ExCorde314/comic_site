@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Info, Info404, Info500, About
+from .forms import AboutEdit, InfoEdit
 
 # About the comic page.
 def about(request):
@@ -16,6 +17,71 @@ def about(request):
     }
 
     return render(request, 'info/about.html', context)
+
+def about_edit(request):
+    if not request.user.is_authenticated or not request.user.has_perm('info.change_info'):
+        raise Http404
+
+    info = Info.load()
+    about = About.load()
+
+    if request.method == "POST":
+        form = AboutEdit(request.POST, instance=about)
+
+        if not form.is_valid():
+            context = {
+                'info': info,
+                'about': about,
+                'user_logged_in': True,
+                'form': form,
+            }
+
+            return render(request, 'info/about_edit.html', context)
+
+        form.save()
+        return redirect("about")
+
+    form = AboutEdit(instance=about)
+
+    context = {
+        'info': info,
+        'about': about,
+        'user_logged_in': True,
+        'form': form,
+    }
+
+    return render(request, 'info/about_edit.html', context)
+
+def info_edit(request):
+    if not request.user.is_authenticated or not request.user.has_perm('info.change_info'):
+        raise Http404
+
+    info = Info.load()
+
+    if request.method == "POST":
+        form = InfoEdit(request.POST, instance=info)
+
+        if not form.is_valid():
+            context = {
+                'info': info,
+                'user_logged_in': True,
+                'form': form,
+            }
+
+            return render(request, 'info/info_edit.html', context)
+
+        form.save()
+        return redirect("admin:admin-panel")
+
+    form = InfoEdit(instance=info)
+
+    context = {
+        'info': info,
+        'user_logged_in': True,
+        'form': form,
+    }
+
+    return render(request, 'info/info_edit.html', context)
 
 # 404 error page
 def custom_404(request):

@@ -1,0 +1,12 @@
+{% include "info/header.html" with site_title="About This Site" %}
+
+<div class="row">
+    <div class="col-12">
+        <div class="about-container">
+            <h1 class="about-title text-center">About This Comic</h1>
+            <div class="container markdown">{{ about.page_contents|markdown }}</div>
+        </div>
+    </div>
+</div>
+
+{% include "info/footer.html" %}

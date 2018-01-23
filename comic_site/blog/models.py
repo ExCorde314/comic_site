@@ -1,12 +1,13 @@
 from django.db import models
 from django.urls import reverse
+from django.utils import timezone
 
 # Model for a blog post
 class Post(models.Model):
     # Attributes for a blog post
     title = models.CharField(max_length=200)
     author = models.CharField(max_length=200)
-    date_published = models.DateTimeField(auto_now_add=True)
+    date_published = models.DateTimeField(default=timezone.now)
     content = models.TextField()
 
     def __str__(self):
