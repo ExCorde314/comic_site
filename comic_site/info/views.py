@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Info, Info404, Info500, About
 from .forms import AboutEdit, InfoEdit
+from django.http import Http404
 
 # About the comic page.
 def about(request):

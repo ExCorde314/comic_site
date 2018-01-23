@@ -57,13 +57,13 @@ class ComicTest(unittest.TestCase):
         login(driver, "NoPerm", "password")
         driver.get(WEB_URL + 'add')
 
-        assert "404 Page Not Found" in driver.page_source  or "Page not found" in driver.page_source
+        assert "404 Page Not Found" in driver.page_source or "Page not found" in driver.page_source
 
     def test_bad_access_add_2(self):
         driver = self.driver
         driver.get(WEB_URL + 'add')
 
-        assert "404 Page Not Found" in driver.page_source  or "Page not found" in driver.page_source
+        assert "404 Page Not Found" in driver.page_source or "Page not found" in driver.page_source
 
     def test_add_success(self):
         pass
@@ -83,13 +83,13 @@ class ComicTest(unittest.TestCase):
         login(driver, "NoPerm", "password")
         driver.get(WEB_URL + 'change/1')
 
-        assert "404 Page Not Found" in driver.page_source  or "Page not found" in driver.page_source
+        assert "404 Page Not Found" in driver.page_source or "Page not found" in driver.page_source
 
     def test_bad_access_change_2(self):
         driver = self.driver
         driver.get(WEB_URL + 'change/1')
 
-        assert "404 Page Not Found" in driver.page_source  or "Page not found" in driver.page_source
+        assert "404 Page Not Found" in driver.page_source or "Page not found" in driver.page_source
 
     def test_change_success(self):
         pass
@@ -109,13 +109,13 @@ class ComicTest(unittest.TestCase):
         login(driver, "NoPerm", "password")
         driver.get(WEB_URL + 'delete/1')
 
-        assert "404 Page Not Found" in driver.page_source  or "Page not found" in driver.page_source
+        assert "404 Page Not Found" in driver.page_source or "Page not found" in driver.page_source
 
     def test_bad_access_delete_2(self):
         driver = self.driver
         driver.get(WEB_URL + 'delete/1')
 
-        assert "404 Page Not Found" in driver.page_source  or "Page not found" in driver.page_source
+        assert "404 Page Not Found" in driver.page_source or "Page not found" in driver.page_source
 
     def test_delete_success(self):
         pass
@@ -158,7 +158,7 @@ class BlogTest(unittest.TestCase):
         driver = self.driver
         driver.get(WEB_URL + 'blog/add')
 
-        assert "404 Page Not Found" in driver.page_source  or "Page not found" in driver.page_source
+        assert "404 Page Not Found" in driver.page_source or "Page not found" in driver.page_source
 
     def test_add_success(self):
         pass
@@ -178,13 +178,13 @@ class BlogTest(unittest.TestCase):
         login(driver, "NoPerm", "password")
         driver.get(WEB_URL + 'blog/change/1')
 
-        assert "404 Page Not Found" in driver.page_source  or "Page not found" in driver.page_source
+        assert "404 Page Not Found" in driver.page_source or "Page not found" in driver.page_source
 
     def test_bad_access_change_2(self):
         driver = self.driver
         driver.get(WEB_URL + 'blog/change/1')
 
-        assert "404 Page Not Found" in driver.page_source  or "Page not found" in driver.page_source
+        assert "404 Page Not Found" in driver.page_source or "Page not found" in driver.page_source
 
     def test_change_success(self):
         pass
@@ -204,13 +204,13 @@ class BlogTest(unittest.TestCase):
         login(driver, "NoPerm", "password")
         driver.get(WEB_URL + 'blog/delete/1')
 
-        assert "404 Page Not Found" in driver.page_source  or "Page not found" in driver.page_source
+        assert "404 Page Not Found" in driver.page_source or "Page not found" in driver.page_source
 
     def test_bad_access_delete_2(self):
         driver = self.driver
         driver.get(WEB_URL + 'blog/delete/1')
 
-        assert "404 Page Not Found" in driver.page_source  or "Page not found" in driver.page_source
+        assert "404 Page Not Found" in driver.page_source or "Page not found" in driver.page_source
 
     def test_delete_success(self):
         pass
@@ -443,9 +443,103 @@ class AdminLoginTest(unittest.TestCase):
     def tearDown(self):
         self.driver.quit()
 
+class AccessPortalTest(unittest.TestCase):
+    def setUp(self):
+        self.driver = get_web_driver()
+
+    def test_access_1(self):
+        driver = self.driver
+        login(driver, "ExCorde314", "password")
+        driver.get(WEB_URL + 'access-portal/')
+
+        assert "Admin Panel" in driver.page_source
+
+    def test_access_2(self):
+        driver = self.driver
+        login(driver, "NoPerm", "password")
+        driver.get(WEB_URL + 'access-portal/')
+
+        assert "Admin Panel" in driver.page_source
+
+    def test_access_bad(self):
+        driver = self.driver
+        driver.get(WEB_URL + 'access-portal/')
+        
+        assert "404 Page Not Found" in driver.page_source or "Page not found" in driver.page_source
+
+    def test_load_more_comics(self):
+        pass
+
+    def test_load_more_posts(self):
+        pass
+
+    def test_edit_info(self):
+        pass
+
+    def test_edit_about(self):
+        pass
+
+    def tearDown(self):
+        self.driver.quit()
+
 class StaticTest(unittest.TestCase):
     def setUp(self):
         self.driver = get_web_driver()
+
+    def test_edit_info(self):
+        driver = self.driver
+        login(driver, "ExCorde314", "password")
+        driver.get(WEB_URL + 'info/edit')
+
+        assert "Change Comic Info" in driver.page_source
+
+        element = driver.find_element_by_id("id_about")
+        element.clear()
+        element.send_keys("TEST646")
+        element = driver.find_element_by_tag_name("button")
+        element.click()
+
+        assert "TEST646" in driver.page_source 
+        assert "Change Comic Info" not in driver.page_source
+        assert WEB_URL + 'access-portal/' == driver.current_url
+
+    def test_edit_info_bad_1(self):
+        driver = self.driver
+        login(driver, "ExCorde314", "password")
+        driver.get(WEB_URL + 'info/edit')
+
+        assert "Change Comic Info" in driver.page_source
+
+        element = driver.find_element_by_id("id_about")
+        element.clear()
+        element = driver.find_element_by_tag_name("button")
+        element.click()
+
+        assert "This field is required." in driver.page_source 
+        assert "Change Comic Info" in driver.page_source
+        assert WEB_URL + 'info/edit' == driver.current_url
+
+    def test_edit_info_access(self):
+        driver = self.driver
+        login(driver, "ExCorde314", "password")
+        driver.get(WEB_URL + 'info/edit')
+
+        assert "Change Comic Info" in driver.page_source
+
+    def test_edit_info_access_bad_1(self):
+        driver = self.driver
+        login(driver, "NoPerm", "password")
+        driver.get(WEB_URL + 'info/edit')
+
+        # print(driver.page_ource)
+
+        assert "404 Page Not Found" in driver.page_source or "Page not found" in driver.page_source
+
+    def test_edit_info_access_bad_2(self):
+        driver = self.driver
+        driver.get(WEB_URL + 'info/edit')
+
+        assert "404 Page Not Found" in driver.page_source or "Page not found" in driver.page_source
 
     def test_about_page(self):
         driver = self.driver
@@ -454,7 +548,60 @@ class StaticTest(unittest.TestCase):
         assert 'container markdown' in driver.page_source
 
     def test_about_page_edit(self):
-        pass
+        driver = self.driver
+        login(driver, "ExCorde314", "password")
+        driver.get(WEB_URL + 'about/edit')
+
+        assert "About This Comic" in driver.page_source 
+        assert "Change About Page" in driver.page_source
+
+        element = driver.find_element_by_id("id_page_contents")
+        element.clear()
+        element.send_keys("TEST646")
+        element = driver.find_element_by_tag_name("button")
+        element.click()
+
+        assert "TEST646" in driver.page_source 
+        assert "Change About Page" not in driver.page_source
+        assert WEB_URL + 'about' == driver.current_url
+        
+    def test_about_page_edit_bad(self):
+        driver = self.driver
+        login(driver, "ExCorde314", "password")
+        driver.get(WEB_URL + 'about/edit')
+
+        assert "About This Comic" in driver.page_source 
+        assert "Change About Page" in driver.page_source
+
+        element = driver.find_element_by_id("id_page_contents")
+        element.clear()
+        element = driver.find_element_by_tag_name("button")
+        element.click()
+
+        assert "This field is required." in driver.page_source 
+        assert "Change About Page" in driver.page_source
+        assert WEB_URL + 'about/edit' == driver.current_url
+
+    def test_about_page_edit_access(self):
+        driver = self.driver
+        login(driver, "ExCorde314", "password")
+        driver.get(WEB_URL + 'about/edit')
+
+        assert "About This Comic" in driver.page_source 
+        assert "Change About Page" in driver.page_source
+
+    def test_about_page_edit_access_bad_1(self):
+        driver = self.driver
+        login(driver, "NoPerm", "password")
+        driver.get(WEB_URL + 'add')
+
+        assert "404 Page Not Found" in driver.page_source or "Page not found" in driver.page_source
+
+    def test_about_page_edit_access_bad_2(self):
+        driver = self.driver
+        driver.get(WEB_URL + 'add')
+
+        assert "404 Page Not Found" in driver.page_source or "Page not found" in driver.page_source
         
     def tearDown(self):
         self.driver.quit()
