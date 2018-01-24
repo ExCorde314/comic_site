@@ -1,0 +1,27 @@
+{% load markdown %}
+{% include "info/header.html" with site_title="About This Site" %}
+
+<div class="row">
+    <div class="col-12">
+        <div class="about-container">
+            <div class="container">
+
+            <form id="change-info-form" method="post" name="change_about" class="change-info-form center-align">
+            {% csrf_token %}
+
+            <h1 class="about-title text-center">Change Comic Info</h1>
+
+            <label for="{{ form.about.id_for_label }}">{{ form.about.label }}</label>
+            <textarea id="{{ form.about.id_for_label }}" name="{{ form.about.html_name }}" class="form-control {% if form.about.errors %} is-invalid {% endif %}" placeholder="Content" rows="10">{% if form.about.value %}{{ form.about.value }}{% endif %}</textarea>
+            {% if form.about.errors %}<div class="invalid-feedback">{{ form.about.errors }}</div>{% endif %}
+
+            <button class="btn form-btn" type="submit" form="change-info-form">Change Comic Info</button>
+
+            </form>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include "info/footer.html" %}

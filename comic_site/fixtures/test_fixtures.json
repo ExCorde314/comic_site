@@ -1,0 +1,36 @@
+[
+   {
+      "model":"admin.registerauth",
+      "pk":2,
+      "fields":{
+         "email":"comediccatcomic@gmail.com",
+         "comic_add":true,
+         "comic_change":true,
+         "comic_delete":true,
+         "post_add":true,
+         "post_change":true,
+         "post_delete":true,
+         "user_add":true,
+         "user_change":true,
+         "user_delete":true,
+         "info_change":true
+      }
+   },
+   {
+      "model":"admin.registerauth",
+      "pk":3,
+      "fields":{
+         "email":"nopermjoe@gmail.com",
+         "comic_add":false,
+         "comic_change":false,
+         "comic_delete":false,
+         "post_add":false,
+         "post_change":false,
+         "post_delete":false,
+         "user_add":false,
+         "user_change":false,
+         "user_delete":false,
+         "info_change":false
+      }
+   }
+]

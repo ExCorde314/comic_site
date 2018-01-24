@@ -1,14 +1,14 @@
-{% include "info/header.html" %}
+{% include "info/header.html" with site_title="404 Error" %}
 
 <div class="col s12">
 
-<div class="comic-container center-align">
+<div class="comic-container text-center">
     <h2 class="comic-title">{{ info404.title }}</h2>
 
     <img class="comic" src="{{ info404.image.url }}" alt="{{ info404.alt_text }}"
          style="max-width: {{ info404.image_width }}px;" title="{{ info404.title_text }}"/>
 </div>
 
-</div> <!-- /.blog-main -->
+</div>
 
 {% include "info/footer.html" %}

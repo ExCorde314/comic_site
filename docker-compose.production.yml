@@ -1,5 +1,5 @@
 comic-site:
-    image: excorde314/comic-site:1.0
+    image: excorde314/comic-site:1.2
     container_name: comic-site
     external_links:
       -  mysql:db
@@ -17,7 +17,7 @@ comic-site:
       - 443
     command: bash -c "cp /app/fixtures/*.png /app/media &&
                       python /app/comic_site/generate_secret_key.py &&
-                      python manage.py makemigrations blog comic info --noinput &&
+                      python manage.py makemigrations blog comic info admin --noinput &&
                       python manage.py migrate --noinput &&
                       python manage.py loaddata /app/fixtures/db.json &&
                       python manage.py collectstatic --noinput &&
@@ -31,4 +31,6 @@ comic-site:
                                                     --https-port 443
                                                     --allow-localhost
                                                     --working-directory /app
-                                                    --reload-on-changes /app/comic_site/wsgi_production.py"
+                                                    --reload-on-changes /app/comic_site/wsgi_production.py
+                                                    --compress-responses
+                                                    --include-file /app/additional_rules.conf"

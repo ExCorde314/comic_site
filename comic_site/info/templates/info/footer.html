@@ -14,8 +14,15 @@
                 <div class="col-lg-4 col-sm-12 offset-lg-2">
                     <h4>Links</h4>
                     <ul class="no-decoration-list">
+                        <li><a class="black-text" href="{% url 'about' %}">About</a></li>
+                        {% if user_logged_in %}
+                        <li><a class="black-text" href="{% url 'admin:admin-panel' %}">Admin</a></li>
+                        {% endif %}
                         <li><a class="black-text" href="{% url 'blog:index' %}">Blog</a></li>
                         <li><a class="black-text" href="{% url 'comic:index' %}">Comic</a></li>
+                        {% if user_logged_in %}
+                        <li><a class="black-text" href="{% url 'admin:logout' %}">Log Out</a></li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>

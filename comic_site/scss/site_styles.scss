@@ -16,6 +16,16 @@
 // $dropdown-link-hover-bg:      #fff;
 // $dropdown-link-active-bg:     #fff;
 
+$border-radius:      0px;
+$border-radius-lg:   0px;
+$border-radius-sm:   0px;
+
+$input-border-color: black;
+$input-border-width: 2px;
+$input-btn-focus-width: 0px; 
+$input-btn-focus-color: black;
+$input-focus-border-color: black;
+
 $grid-breakpoints: (
   xs: 0,
   sm: 576px,
@@ -52,9 +62,20 @@ header {
     background-color: white;
 }
 
+label {
+    margin: .5rem 0;
+}
+
 footer {
     background-color: white !important;
     border-top: 2px solid black;
+}
+
+.errorlist {
+    list-style-type:none;
+    padding: 0px;
+    margin: 0px;
+    color: $red;
 }
 
 .nav-item, .nav-item:hover {
@@ -84,6 +105,7 @@ footer {
 
 .comic {
     width: 100%;
+    max-width: 3000px;
 }
 
 .comic-nav {
@@ -95,6 +117,48 @@ footer {
     }
 }
 
+.markdown table {
+    @extend .table;
+    @extend .table-bordered;
+
+    thead th {
+        border-bottom: 2px solid $black;
+    }
+
+    td {
+        border: 1px solid $black;
+    }
+
+    th {
+        border: 1px solid $black;
+    }
+}
+
+.form-btn {
+    color: $black;
+    margin-top: 20px;
+    background-color: $white;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.login-container {
+    background-color: white;
+    width: 100%;
+    padding: 30px 20px;
+    margin: 40px 0px 40px 0px;
+    border: 2px solid black;
+}
+
+.signup-container {
+    background-color: white;
+    width: 100%;
+    padding: 30px 20px;
+    margin: 40px 0px 40px 0px;
+    border: 2px solid black;
+}
+
 .blog-nav {
     margin: 40px 0px 10px 0px;
 
@@ -104,13 +168,21 @@ footer {
     }
 }
 
+.table thead th, .table th, .table td {
+    border-color: $black;
+}
+
+.table-button-column {
+    width: 70px;
+}
+
 .main-content {
-    width: 70%;
+    width: 90%;
     padding: 0;
 }
 
 .main-navbar .container {
-    width: 70%;
+    width: 90%;
     padding: 0;
 }
 
@@ -119,8 +191,23 @@ footer {
 }
 
 .page-footer .container {
-    width: 70%;
+    width: 90%;
     padding: 0;
+}
+
+.about-title {
+    font-size: 30px;
+    padding: 0px;
+    margin: 0px;
+    margin-bottom: 20px;
+}
+
+.about-container {
+    background-color: white;
+    width: 100%;
+    padding: 30px 0px;
+    margin: 40px 0px 40px 0px;
+    border: 2px solid black;
 }
 
 #logo {
@@ -135,7 +222,7 @@ footer {
 }
 
 .blog-meta {
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 
 .blog-container {
@@ -179,6 +266,12 @@ footer {
     height: 50px;
     line-height: 50px;
     background-color: rgba(51,51,51,0.08);
+}
+
+@include media-breakpoint-down(md) {
+    .nav-item {
+        padding-bottom: 7px; 
+    }
 }
 
 @include media-breakpoint-up(sm) {

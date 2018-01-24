@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Comedic Cat: Sign Up</title>
+    <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-90432288-1', 'auto');ga('send', 'pageview');</script>
+    <link href="{% static 'site_styles.css' %}" rel="stylesheet" />
+    <link rel="short icon" type="image/png" href="{% static 'favicon.png' %}" />
+</head>
+
+<body>
+    <main>
+
+    <div class="main-content container">
+        <div class="row justify-content-center">
+        
+        <div class="col-xl-6 col-md-8 col-sm-12">
+            <div class="signup-container center-align">
+                <form id="signup-form" method="post" name="signup" class="form-signup center-align">
+                    {% csrf_token %}
+                    <h2 class="text-center">Sign Up</h2>
+
+                    {% if form.non_field_errors %}
+                        <div class="text-center">
+                            {{ form.non_field_errors }}
+                        </div>
+                    {% endif %}
+
+                    <label for="{{ form.first_name.id_for_label }}">{{ form.first_name.label }}</label>
+                    <input type="text" id="{{ form.first_name.id_for_label }}" name="{{ form.first_name.html_name }}" {% if form.first_name.value %} value="{{ form.first_name.value }}" {% endif %} class="form-control {% if form.first_name.errors %} is-invalid {% endif %}" placeholder="Username" autofocus>
+                    {% if form.first_name.errors %}<div class="invalid-feedback">{{ form.first_name.errors }}</div>{% endif %}
+
+                    <label for="{{ form.last_name.id_for_label }}">{{ form.last_name.label }}</label>
+                    <input type="text" id="{{ form.last_name.id_for_label }}" name="{{ form.last_name.html_name }}" {% if form.last_name.value %} value="{{ form.last_name.value }}" {% endif %} class="form-control {% if form.last_name.errors %} is-invalid {% endif %}" placeholder="Username" autofocus>
+                    {% if form.last_name.errors %}<div class="invalid-feedback">{{ form.last_name.errors }}</div>{% endif %}
+
+                    <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+                    <input type="text" id="{{ form.email.id_for_label }}" name="{{ form.email.html_name }}" {% if form.email.value %} value="{{ form.email.value }}" {% endif %} class="form-control {% if form.email.errors %} is-invalid {% endif %}" placeholder="Username" autofocus>
+                    {% if form.email.errors %}<div class="invalid-feedback">{{ form.email.errors }}</div>{% endif %}
+
+                    <label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
+                    <input type="text" id="{{ form.username.id_for_label }}" name="{{ form.username.html_name }}" {% if form.username.value %} value="{{ form.username.value }}" {% endif %} class="form-control {% if form.username.errors %} is-invalid {% endif %}" placeholder="Username" autofocus>
+                    {% if form.username.errors %}<div class="invalid-feedback">{{ form.username.errors }}</div>{% endif %}
+                    
+                    <label for="{{ form.password1.id_for_label }}">Password</label>
+                    <input type="password" id="{{ form.password1.id_for_label }}" name="{{ form.password1.html_name }}" class="form-control {% if form.password1.errors %} is-invalid {% endif %}" placeholder="Password">
+                    {% if form.password1.errors %}<div class="invalid-feedback">{{ form.password1.errors }}</div>{% endif %}
+
+                    <label for="{{ form.password2.id_for_label }}">Password</label>
+                    <input type="password" id="{{ form.password2.id_for_label }}" name="{{ form.password2.html_name }}" class="form-control {% if form.password2.errors %} is-invalid {% endif %}" placeholder="Password">
+                    {% if form.password2.errors %}<div class="invalid-feedback">{{ form.password2.errors }}</div>{% endif %}
+                    
+                    <button class="btn form-btn" type="submit" form="signup-form">Sign Up</button>
+                </form>
+            </div>
+        </div>
+
+        </div>
+    </div>
+
+    </main>
+</body>
+
+</html>

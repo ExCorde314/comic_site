@@ -1,12 +1,25 @@
 [
+   {
+      "model": "info.about",
+      "pk": 1,
+      "fields":{
+         "page_contents": "This Comic"
+      }
+   }, 
+   {  
+      "model":"sites.site",
+      "pk":1,
+      "fields":{  
+         "domain":"comediccat.com",
+         "name":"comediccat.com"
+      }
+   },  
    {  
       "model":"comic.comic",
       "pk":1,
       "fields":{  
          "title":"Finding A Hat",
          "image":"finding_a_hat_.png",
-         "image_width":"3000",
-         "image_height":"1395",
          "title_text":"Hats are mysterious things",
          "alt_text":"A person finds a hat",
          "date_published":"2017-01-14T21:34:28.572Z"
@@ -18,8 +31,6 @@
       "fields":{  
          "title":"An Unusually Happy Morning",
          "image":"unusually_happy_morning.png",
-         "image_width":"3000",
-         "image_height":"1139",
          "title_text":"Coffee sometimes goes a long way to making a great day.",
          "alt_text":"Happy person walking",
          "date_published":"2017-01-15T02:15:21.820Z"
@@ -31,8 +42,6 @@
       "fields":{  
          "title":"The Hat Has A Cat",
          "image":"the_hat_has_a_hat.png",
-         "image_width":"3000",
-         "image_height":"948",
          "title_text":"Sometimes you find things in unexpected places.",
          "alt_text":"A person pulls a cat out of a hat",
          "date_published":"2017-01-15T05:18:02.635Z"
@@ -44,8 +53,6 @@
       "fields":{  
          "title":"The Grounds",
          "image":"the_grounds.png",
-         "image_width":"3000",
-         "image_height":"1397",
          "title_text":"He'll never say 'Freshman' again!",
          "alt_text":"Burning at the stake",
          "date_published":"2017-01-19T23:00:10.080Z"
@@ -58,17 +65,45 @@
          "title":"Hello World!",
          "author":"Jonathan Lowe",
          "date_published":"2017-01-18T19:41:59.757Z",
-         "content":"<p>Hello world!</p>\r\n<p>I have decided to make a web comic, for my own personal enjoyment and so I would have a reason to learn about building websites.</p>\r\n<p>I have posted some comics I drew a while ago and will add more eventually; I will be busy for the next few months.</p>\r\n<p>This blog will be primarially used for posting updates and information about the comic.</p>\r\n<p>Adios amigos!</p>"
+         "content":"Hello, world!\r\n\r\nI have decided to make a webcomic, for my own personal enjoyment and so I would have a reason to learn about building websites.\r\n\r\nI have posted some comics I drew a while ago and will add more eventually; I will be busy for the next few months.\r\n\r\nThis blog will be primarily used for posting updates and information about the comic.\r\n\r\nAdios amigos!"
+      }
+   },
+   {  
+      "model":"admin.registerauth",
+      "pk":1,
+      "fields":{  
+         "email":"jonathanglowe@gmail.com",
+         "comic_add":true,
+         "comic_change":true,
+         "comic_delete":true,
+         "post_add":true,
+         "post_change":true,
+         "post_delete":true,
+         "user_add":true,
+         "user_change":true,
+         "user_delete":true,
+         "info_change":true
       }
    },
    {  
       "model":"info.info",
       "pk":1,
       "fields":{  
-         "site_name":"Comedic Cat",
-         "charset":"utf-8",
          "logo":"logo.png",
          "about":"This comic is about ordinary, intriguing, and downright strange things and contains some interesting characters."
+      }
+   },
+   {  
+      "model":"info.info400",
+      "pk":1,
+      "fields":{  
+         "title":"400 Bad request",
+         "image":"404_image.png",
+         "image_width":"500",
+         "image_height":"500",
+         "title_text":"You must be expecting to find something...",
+         "alt_text":"Wondering cat and hatted figure",
+         "message":"Try here for comics."
       }
    },
    {  
@@ -76,19 +111,6 @@
       "pk":1,
       "fields":{  
          "title":"404 Page Not Found",
-         "image":"404_image.png",
-         "image_width":"500",
-         "image_height":"1808",
-         "title_text":"You must be expecting to find something...",
-         "alt_text":"Wondering cat and hatted figure",
-         "message":"Try here for comics."
-      }
-   },
-   {  
-      "model":"info.info500",
-      "pk":1,
-      "fields":{  
-         "title":"500 Something Broke Here...",
          "image":"404_image.png",
          "image_width":"500",
          "image_height":"1808",
@@ -111,13 +133,13 @@
       }
    },
    {  
-      "model":"info.info400",
+      "model":"info.info500",
       "pk":1,
       "fields":{  
-         "title":"400 Bad request",
+         "title":"500 Something Broke Here...",
          "image":"404_image.png",
          "image_width":"500",
-         "image_height":"500",
+         "image_height":"1808",
          "title_text":"You must be expecting to find something...",
          "alt_text":"Wondering cat and hatted figure",
          "message":"Try here for comics."

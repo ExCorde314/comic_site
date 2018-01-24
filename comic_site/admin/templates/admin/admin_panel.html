@@ -1,0 +1,263 @@
+{% include "info/header.html" with site_title="Admin Panel" %}
+
+<div class="row">
+    <div class="col-12">
+        <div class="comic-container">
+
+        <h1 class="about-title text-center">Admin Panel</h1>
+
+        <div class="container">
+
+        {% if perms.comic %}
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    <h4>Comics</h4>
+                </div>
+                {% if perms.comic.add_comic %}
+                <div class="col-sm text-right">
+                    <a href="{% url 'comic:add' %}" class="black-text">New Comic</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="table-responsive-md">
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Comic</th>
+                    <th scope="col">Added</th>
+                    {% if perms.comic.change_comic %}
+                    <th scope="col" class="table-button-column">Edit</th>
+                    {% endif %}
+
+                    {% if perms.comic.delete_comic %}
+                    <th scope="col" class="table-button-column">Delete</th>
+                    {% endif %}
+                </tr>
+            </thead>
+
+            <tbody id="comic-table">
+            </tbody>
+        </table>
+
+        <button id="add-comics" class="btn form-btn mb-4">Show More</button>
+
+        {% endif %}
+
+        {% if perms.blog %}
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    <h4>Posts</h4>
+                </div>
+                {% if perms.blog.add_post %}
+                <div class="col-sm text-right">
+                    <a href="{% url 'blog:add' %}" class="black-text">New Post</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="table-responsive-md">
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Post</th>
+                    <th scope="col">Added</th>
+                    {% if perms.blog.change_post %}
+                    <th scope="col" class="table-button-column">Edit</th>
+                    {% endif %}
+
+                    {% if perms.blog.delete_post %}
+                    <th scope="col" class="table-button-column">Delete</th>
+                    {% endif %}
+                </tr>
+            </thead>
+
+            <tbody id="post-table">
+            </tbody>
+        </table>
+
+        </div>
+
+        <button id="add-posts" class="btn form-btn mb-4">Show More</button>
+
+        {% endif %}
+
+        <!-- {% if perms.admin %}
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    <h4>Users</h4>
+                </div>
+                <div class="col-sm text-right">
+                    <a href="{% url 'comic:add' %}" class="black-text">Authorize User</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="table-responsive-md">
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Username</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Added</th>
+                    <th scope="col" class="table-button-column">Edit</th>
+                    <th scope="col" class="table-button-column">Delete</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>MOTO213</td>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td class="table-button-column"><a href="{% url 'comic:add' %}" class="black-text">Edit</a></td>
+                    <td class="table-button-column"><a href="{% url 'comic:add' %}" class="black-text">Delete</a></td>
+                </tr>
+            </tbody>
+        </table>
+
+        </div>
+
+        {% endif %} -->
+
+        {% if perms.info.change_info %}
+
+        <h4 class="text-center">Change Site Information</h3>
+
+        <a href="{% url 'info-edit' %}" class="btn form-btn mb-4 black-text">Edit Site Information</a>
+
+        <h4 class="text-center">Change About Page</h3>
+
+        <a href="{% url 'about-edit' %}" class="btn form-btn black-text">Edit About Page</a>
+
+        {% endif %}
+
+        </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    var addResults = function (pageNum, baseUrl, tableId, group, dateField, fields, includeEdit, includeDelete) {
+        var comicXhttp = new XMLHttpRequest();
+        comicXhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var table = document.getElementById(tableId);
+                var items = JSON.parse(comicXhttp.responseText);
+
+                if (items.success) {
+                    items.data.forEach(function(item) {
+                        var tr = document.createElement("tr");
+                        var td = document.createElement("td");
+                        var edit = document.createElement("a");
+                        var del = document.createElement("a");
+                        
+                        table.append(tr);
+
+                        fields.forEach(function(i) {
+                            var td = document.createElement("td");
+                            td.innerText = item[i];
+                            tr.append(td);
+                        });
+
+                        td.innerText = new Date(item[dateField]).toLocaleDateString();
+                        tr.append(td);
+                        
+                        if (includeEdit === true) {
+                            td = document.createElement("td");
+                            edit.innerText = "Edit";
+                            edit.classList.add("black-text");
+                            edit.setAttribute("href", baseUrl + "change/" + item.id);
+                            td.append(edit);
+                            tr.append(td);
+                        }
+
+                        if (includeDelete === true) {
+                            td = document.createElement("td");
+                            del.innerText = "Delete";
+                            del.classList.add("black-text");
+                            del.setAttribute("href", baseUrl + "delete/" + item.id);
+                            td.append(del);
+                            tr.append(td);
+                        }
+                    });
+                } else {
+                    document.getElementById("demo").innerHTML = comicXhttp.responseText;
+                }
+                
+            } else if (this.readyState == 4) {
+                comicPage -= 1;
+                // document.getElementById("demo").innerHTML = "ERROR: " + this.status;
+            } else {
+                // document.getElementById("demo").innerHTML = "ERROR: " + this.status;
+            }
+        };
+        comicXhttp.open("GET", "{% url 'admin:admin-panel-pagination' %}?type=" + group + "&page=" + pageNum, true);
+        comicXhttp.send();
+    };
+
+    /* TODO -- Maybe use pagination instead of adding additional */
+    // table.innerHTML = "";
+
+    {% if perms.comic %}
+    
+    var comicPage = 1;
+    var baseUrlComic = "{% url 'comic:index' %}";
+
+    {% if perms.comic.delete_comic %}
+    var includeDeleteComic = true;
+    {% else %}
+    var includeDeleteComic = false;
+    {% endif %}
+
+    {% if perms.comic.change_comic %}
+    var includeEditComic = true;
+    {% else %}
+    var includeEditComic = false;
+    {% endif %}
+
+    addResults(comicPage, baseUrlComic, "comic-table", "comic", "date_published", ['title'], includeEditComic, includeDeleteComic);
+    document.getElementById("add-comics").onclick = function() {
+        comicPage += 1;
+        addResults(comicPage, baseUrlComic, "comic-table", "comic", "date_published", ['title'], includeEditComic, includeDeleteComic);
+    }
+    {% endif %}
+
+    {% if perms.blog %}
+
+    var postPage = 1;
+    var baseUrlPost = "{% url 'blog:index' %}";
+
+    {% if perms.blog.delete_post %}
+    var includeDeleteBlog = true;
+    {% else %}
+    var includeDeleteBlog = false;
+    {% endif %}
+
+    {% if perms.blog.change_post %}
+    var includeEditBlog = true;
+    {% else %}
+    var includeEditBlog = false;
+    {% endif %}
+
+    addResults(postPage, baseUrlPost, "post-table", "blog", "date_published", ['title'], includeEditBlog, includeDeleteBlog);
+    document.getElementById("add-posts").onclick = function() {
+        postPage += 1;
+        addResults(postPage, baseUrlPost, "post-table", "blog", "date_published", ['title'], includeEditBlog, includeDeleteBlog);
+    }
+    {% endif %}
+</script>
+
+{% include "info/footer.html" %}

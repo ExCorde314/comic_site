@@ -1,0 +1,22 @@
+{% include "info/header.html" with site_title=comic.title %}
+
+<div class="row">
+    <div class="col-12">
+        <div class="comic-container">
+
+        <h1 class="comic-title text-center">{{ comic.title }}</h1>
+
+        <img class="comic" src="{{ comic.image.url }}" title="{{ comic.title_text }}" alt="{{ comic.alt_text }}" />
+
+        <div class="comic-nav row">
+            <div class="col-3 text-right"><a href="{% url 'comic:single' first %}">First</a></div>
+            <div class="col-2 text-left"><a href="{% url 'comic:single' previous %}">Previous</a></div>
+            <div class="col-4 text-right"><a href="{% url 'comic:single' next %}">Next</a></div>
+            <div class="col-3 text-left"><a href="{% url 'comic:index' %}">Latest</a></div>
+        </div>
+
+        </div>
+    </div>
+</div>
+
+{% include "info/footer.html" %}
