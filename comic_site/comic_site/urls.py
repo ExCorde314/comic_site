@@ -5,7 +5,8 @@ from django.contrib.sitemaps.views import sitemap
 from comic.sitemaps import ComicSitemap
 from blog.sitemaps import BlogSitemap
 from .sitemaps import StaticSitemap
-from info.views import about, about_edit, info_edit
+from django.conf.urls import handler404, handler500, handler403, handler400
+from info.views import about, about_edit, info_edit, custom_404, custom_500, custom_403, custom_400
 
 sitemaps = {
     'static': StaticSitemap(),
@@ -24,7 +25,7 @@ urlpatterns = [
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
 ]
 
-handler404 = 'info.views.custom_404'
-handler500 = 'info.views.custom_500'
-handler403 = 'info.views.custom_403'
-handler400 = 'info.views.custom_400'
+handler404 = custom_404
+handler500 = custom_500
+handler403 = custom_403
+handler400 = custom_400

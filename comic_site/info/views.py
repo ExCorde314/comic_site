@@ -85,7 +85,7 @@ def info_edit(request):
     return render(request, 'info/info_edit.html', context)
 
 # 404 error page
-def custom_404(request):
+def custom_404(request, exception):
     # Gets whether or not the user is logged in
     user_logged_in = request.user.is_authenticated
 
@@ -98,9 +98,7 @@ def custom_404(request):
         'user_logged_in': user_logged_in,
     }
 
-    response.status_code = 404
-
-    return render(request, 'info/404_page.html', context)
+    return render(request, 'info/404_page.html', context, status=404)
 
 # 500 error page
 def custom_500(request):
@@ -108,7 +106,7 @@ def custom_500(request):
     user_logged_in = request.user.is_authenticated
 
     info = Info.load()
-    info404 = Info404.load()
+    info500 = Info500.load()
 
     context = {
         'info': info,
@@ -116,9 +114,7 @@ def custom_500(request):
         'user_logged_in': user_logged_in,
     }
 
-    response.status_code = 500
-
-    return render(request, 'info/500_page.html', context)
+    return render(request, 'info/500_page.html', context, status=500)
 
 # 403 error page
 def custom_403(request):
@@ -134,9 +130,7 @@ def custom_403(request):
         'user_logged_in': user_logged_in,
     }
 
-    response.status_code = 403
-
-    return render(request, 'info/403_page.html', context)
+    return render(request, 'info/403_page.html', context, status=403)
 
 # 400 error page
 def custom_400(request):
@@ -152,6 +146,4 @@ def custom_400(request):
         'user_logged_in': user_logged_in,
     }
 
-    response.status_code = 400
-
-    return render(request, 'info/400_page.html', context)
+    return render(request, 'info/400_page.html', context, status=400)
