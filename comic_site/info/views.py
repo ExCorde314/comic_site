@@ -117,7 +117,7 @@ def custom_500(request):
     return render(request, 'info/500_page.html', context, status=500)
 
 # 403 error page
-def custom_403(request):
+def custom_403(request, exception):
     # Gets whether or not the user is logged in
     user_logged_in = request.user.is_authenticated
 
@@ -133,7 +133,7 @@ def custom_403(request):
     return render(request, 'info/403_page.html', context, status=403)
 
 # 400 error page
-def custom_400(request):
+def custom_400(request, exception):
     # Gets whether or not the user is logged in
     user_logged_in = request.user.is_authenticated
 
