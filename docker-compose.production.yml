@@ -16,7 +16,7 @@ proxy:
     - 443
 
 comic-site:
-  image: excorde314/comic-site:1.2
+  image: excorde314/comic-site:1.3
   container_name: comic-site
   external_links:
     -  mysql:db
@@ -32,6 +32,4 @@ comic-site:
                     python manage.py migrate --noinput &&
                     python manage.py loaddata /app/fixtures/db.json &&
                     python manage.py collectstatic --noinput &&
-                    mod_wsgi-express start-server --port 8080
-                                                  --working-directory /app
-                                                  --reload-on-changes /app/comic_site/wsgi.py"
+                    gunicorn --bind 0.0.0.0:8080 comic_site.wsgi"
