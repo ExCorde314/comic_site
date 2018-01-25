@@ -1,36 +1,37 @@
+proxy:
+  image: nginx:1.13.8
+  container_name: nginx-proxy
+  links:
+    - comic-site:comic-site
+  volumes:
+    - ./nginx/nginx.production.conf:/etc/nginx/nginx.conf
+    - ./certificates:/certificates
+    - ./comic_site/media:/media
+    - ./comic_site/static:/static
+  ports:
+    - 80:80
+    - 443:443
+  expose:
+    - 80
+    - 443
+
 comic-site:
-    image: excorde314/comic-site:1.2
-    container_name: comic-site
-    external_links:
-      -  mysql:db
-    volumes:
-      - ./comic_site:/app
-      - /etc/letsencrypt:/certificate
-    environment:
-      DJANGO_SETTINGS_MODULE: "settings_production"
-      PYTHONPATH: "/app/comic_site"
-    ports:
-      - 80:80
-      - 443:443
-    expose:
-      - 80
-      - 443
-    command: bash -c "cp /app/fixtures/*.png /app/media &&
-                      python /app/comic_site/generate_secret_key.py &&
-                      python manage.py makemigrations blog comic info admin --noinput &&
-                      python manage.py migrate --noinput &&
-                      python manage.py loaddata /app/fixtures/db.json &&
-                      python manage.py collectstatic --noinput &&
-                      mod_wsgi-express start-server --url-alias /static /app/static
-                                                    --url-alias /media /app/media
-                                                    --server-name comediccat.com
-                                                    --port 80
-                                                    --ssl-certificate-file /certificate/archive/comediccat.com/fullchain1.pem
-                                                    --ssl-certificate-key-file /certificate/archive/comediccat.com/privkey1.pem
-                                                    --https-only
-                                                    --https-port 443
-                                                    --allow-localhost
-                                                    --working-directory /app
-                                                    --reload-on-changes /app/comic_site/wsgi_production.py
-                                                    --compress-responses
-                                                    --include-file /app/additional_rules.conf"
+  image: excorde314/comic-site:1.2
+  container_name: comic-site
+  external_links:
+    -  mysql:db
+  volumes:
+    - ./comic_site:/app
+  environment:
+    DJANGO_PRODUCTION: "production"
+  ports:
+    - 8080:8080
+  command: bash -c "cp /app/fixtures/*.png /app/media &&
+                    python /app/comic_site/generate_secret_key.py &&
+                    python manage.py makemigrations blog comic info admin --noinput &&
+                    python manage.py migrate --noinput &&
+                    python manage.py loaddata /app/fixtures/db.json &&
+                    python manage.py collectstatic --noinput &&
+                    mod_wsgi-express start-server --port 8080
+                                                  --working-directory /app
+                                                  --reload-on-changes /app/comic_site/wsgi.py"
