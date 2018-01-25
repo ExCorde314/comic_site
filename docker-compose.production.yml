@@ -5,7 +5,7 @@ proxy:
     - comic-site:comic-site
   volumes:
     - ./nginx/nginx.production.conf:/etc/nginx/nginx.conf
-    - ./certificates:/certificates
+    - /certificates:/certificates
     - ./comic_site/media:/media
     - ./comic_site/static:/static
   ports:
