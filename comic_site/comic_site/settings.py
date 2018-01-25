@@ -19,17 +19,39 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/dev/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '=ktg&2xl)ce@dumf8h3%sqevh1qg+wat%oyy(658zy4-g!wl3y'
+PRODUCTION = os.getenv("DJANGO_PRODUCTION", "development") == "production"
+ALLOWED_HOSTS = ['comediccat.com', 'www.comediccat.com', 'localhost', '127.0.0.1', 'comic-site', 'web']
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+if PRODUCTION:
+    # SECURITY WARNING: keep the secret key used in production secret!
+    with open('/etc/django_secret_key.txt') as f:
+        SECRET_KEY = f.read().strip()
 
-ALLOWED_HOSTS = ['comediccat.com', 'localhost']
+    DEBUG = False
+
+    ADMINS = [('Jonathan Lowe', 'comediccatcomic@gmail.com')]
+
+    # Deployment security
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_BROWSER_XSS_FILTER = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    CSRF_COOKIE_HTTPONLY = True
+    X_FRAME_OPTIONS = 'DENY'
+
+    # SSL options are set by nginx server so these are not needed
+    # SECURE_SSL_REDIRECT = True
+    # SECURE_HSTS_SECONDS = 31536000
+    # SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+else:
+    # SECURITY WARNING: keep the secret key used in production secret!
+    SECRET_KEY = '=ktg&2xl)ce@dumf8h3%sqevh1qg+wat%oyy(658zy4-g!wl3y'
+
+    # SECURITY WARNING: don't run with debug turned on in production!
+    DEBUG = True
 
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -126,10 +148,15 @@ USE_TZ = True
 # ID for the site model
 SITE_ID = 1
 
-# Static files (CSS, JavaScript, Images)
+# Static files (CSS, JavaScript, Images)   
 # https://docs.djangoproject.com/en/dev/howto/static-files/
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 MEDIA_ROOT = '/app/media/'
-MEDIA_URL = 'http://localhost:8000/media/'
+
+if PRODUCTION:
+    MEDIA_URL = 'https://comediccat.com/media/'
+    DEFAULT_FROM_EMAIL = 'webmaster@comediccat.com'
+    SERVER_EMAIL = 'webmaster@comediccat.com'
+else:
+    MEDIA_URL = 'http://localhost:8000/media/'

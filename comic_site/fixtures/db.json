@@ -3,7 +3,7 @@
       "model": "info.about",
       "pk": 1,
       "fields":{
-         "page_contents": "This Comic"
+         "page_contents": "I have made this webcomic as a way to show my comics to friends and acquaintances and to sharpen my website development skills.\r\n\r\n#### Who am I?\r\n\r\nI am a graduate of the University of Virginia with a degree in Computer Engineering. I am currently employed by a company that operates a diverse set of networking infrastructure. In my free time, I listen to audiobooks, play the piano, and cook.\r\n\r\n#### Technical Stuff\r\n\r\nIf you are interested in how I made this website, [here is the link to the Github repository for this website](https://github.com/ExCorde314/comic_site).\r\n\r\n#### Contact Information\r\n\r\nJonathan Lowe: comediccatcomic@gmail.com\r\n\r\n#### Using the Comics\r\n\r\nIf you want to use these comics elsewhere, email me using the contact information above. I will try to reply promptly."
       }
    }, 
    {  
