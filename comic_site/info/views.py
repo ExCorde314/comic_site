@@ -8,11 +8,9 @@ def about(request):
     # Gets whether or not the user is logged in
     user_logged_in = request.user.is_authenticated
 
-    info = Info.load()
     about = About.load()
 
     context = {
-        'info': info,
         'about': about,
         'user_logged_in': user_logged_in,
     }
@@ -23,7 +21,6 @@ def about_edit(request):
     if not request.user.is_authenticated or not request.user.has_perm('info.change_info'):
         raise Http404
 
-    info = Info.load()
     about = About.load()
 
     if request.method == "POST":
@@ -31,7 +28,6 @@ def about_edit(request):
 
         if not form.is_valid():
             context = {
-                'info': info,
                 'about': about,
                 'user_logged_in': True,
                 'form': form,
@@ -45,7 +41,6 @@ def about_edit(request):
     form = AboutEdit(instance=about)
 
     context = {
-        'info': info,
         'about': about,
         'user_logged_in': True,
         'form': form,
@@ -64,7 +59,6 @@ def info_edit(request):
 
         if not form.is_valid():
             context = {
-                'info': info,
                 'user_logged_in': True,
                 'form': form,
             }
@@ -77,7 +71,6 @@ def info_edit(request):
     form = InfoEdit(instance=info)
 
     context = {
-        'info': info,
         'user_logged_in': True,
         'form': form,
     }
@@ -89,11 +82,9 @@ def custom_404(request, exception):
     # Gets whether or not the user is logged in
     user_logged_in = request.user.is_authenticated
 
-    info = Info.load()
     info404 = Info404.load()
 
     context = {
-        'info': info,
         'info404': info404,
         'user_logged_in': user_logged_in,
     }
@@ -105,11 +96,9 @@ def custom_500(request):
     # Gets whether or not the user is logged in
     user_logged_in = request.user.is_authenticated
 
-    info = Info.load()
     info500 = Info500.load()
 
     context = {
-        'info': info,
         'info500': info500,
         'user_logged_in': user_logged_in,
     }
@@ -121,11 +110,9 @@ def custom_403(request, exception):
     # Gets whether or not the user is logged in
     user_logged_in = request.user.is_authenticated
 
-    info = Info.load()
     info403 = Info403.load()
 
     context = {
-        'info': info,
         'info403': info403,
         'user_logged_in': user_logged_in,
     }
@@ -137,11 +124,9 @@ def custom_400(request, exception):
     # Gets whether or not the user is logged in
     user_logged_in = request.user.is_authenticated
 
-    info = Info.load()
     info400 = Info400.load()
 
     context = {
-        'info': info,
         'info400': info400,
         'user_logged_in': user_logged_in,
     }

@@ -1,5 +1,4 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from info.models import Info
 from .models import Comic
 from .forms import AddComic, ChangeComic, DeleteComic
 from django.http import Http404
@@ -12,7 +11,6 @@ def index(request):
     # Gets the latest and first comics
     comic = Comic.objects.filter(date_published__isnull=False).latest('date_published')
     earliest = Comic.objects.filter(date_published__isnull=False).earliest('date_published')
-    info = Info.load()
 
     # Gets the next and previous comic
     try:
@@ -31,7 +29,6 @@ def index(request):
         'first': earliest.id,
         'next': next_post,
         'previous': previous_post,
-        'info': info,
         'user_logged_in': user_logged_in,
     }
 
@@ -46,7 +43,6 @@ def single(request, comic_id):
     # Gets the current comic and the first comic
     comic = get_object_or_404(Comic, pk=comic_id)
     earliest = Comic.objects.filter(date_published__isnull=False).earliest('date_published')
-    info = Info.load()
 
     # Gets the next and previous comic
     try:
@@ -64,7 +60,6 @@ def single(request, comic_id):
         'first': earliest.id,
         'next': next_post,
         'previous': previous_post,
-        'info': info,
         'user_logged_in': user_logged_in,
     }
 
@@ -80,9 +75,7 @@ def add(request):
 
         if not form.is_valid():
             # Prepares the context for the page
-            info = Info.load()
             context = {
-                'info': info,
                 'user_logged_in': True,
                 'form': form,
             }
@@ -92,13 +85,10 @@ def add(request):
         form.save()
         return redirect('admin:admin-panel')
 
-
-    info = Info.load()
     form = AddComic()
 
     # Prepares the context for the page
     context = {
-        'info': info,
         'user_logged_in': True,
         'form': form,
     }
@@ -116,9 +106,7 @@ def change(request, comic_id):
 
         if not form.is_valid():
             # Prepares the context for the page
-            info = Info.load()
             context = {
-                'info': info,
                 'user_logged_in': True,
                 'form': form,
                 'comic': comic,
@@ -129,12 +117,10 @@ def change(request, comic_id):
         form.save()
         return redirect('comic:single', comic_id=comic_id)
 
-    info = Info.load()
     form = ChangeComic(instance=comic)
 
     # Prepares the context for the page
     context = {
-        'info': info,
         'user_logged_in': True,
         'form': form,
         'comic': comic,
@@ -153,9 +139,7 @@ def delete(request, comic_id):
 
         if not form.is_valid():
             # Prepares the context for the page
-            info = Info.load()
             context = {
-                'info': info,
                 'user_logged_in': True,
                 'form': form,
                 'comic': comic,
@@ -166,12 +150,10 @@ def delete(request, comic_id):
         comic.delete()
         return redirect('comic:index')
     
-    info = Info.load()
     form = DeleteComic()
 
     # Prepares the context for the page
     context = {
-        'info': info,
         'user_logged_in': True,
         'form': form,
         'comic': comic,

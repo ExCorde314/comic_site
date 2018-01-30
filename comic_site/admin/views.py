@@ -8,7 +8,6 @@ from django.http import Http404, JsonResponse
 from .forms import LoginForm, SignupForm
 from comic.models import Comic
 from blog.models import Post
-from info.models import Info
 from .models import RegisterAuth
 import math
 
@@ -25,10 +24,7 @@ def admin_panel(request):
     if not request.user.is_authenticated:
         raise Http404
 
-    info = Info.load()
-
     context = {
-        'info': info,
         'user_logged_in': True,
         'post_count': math.ceil(Post.objects.count()/PAGINATION_SIZE),
         'user_count': math.ceil(User.objects.count()/PAGINATION_SIZE),

@@ -1,5 +1,4 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from info.models import Info
 from .models import Post
 from .forms import AddPost, ChangePost, DeletePost
 from django.http import Http404
@@ -12,7 +11,6 @@ def index(request):
     # Gets the latest and first blog posts
     post = Post.objects.filter(date_published__isnull=False).latest('date_published')
     earliest = Post.objects.filter(date_published__isnull=False).earliest('date_published')
-    info = Info.load()
 
     # Gets the next and previous post
     try:
@@ -30,7 +28,6 @@ def index(request):
         'first': earliest.id,
         'next': next_post,
         'previous': previous_post,
-        'info': info,
         'user_logged_in': user_logged_in,
     }
 
@@ -45,7 +42,6 @@ def single(request, post_id):
     # Gets the current post and the first post
     post = get_object_or_404(Post, pk=post_id)
     earliest = Post.objects.filter(date_published__isnull=False).earliest('date_published')
-    info = Info.load()
 
     # Gets the next and previous post
     try:
@@ -63,7 +59,6 @@ def single(request, post_id):
         'first': earliest.id,
         'next': next_post,
         'previous': previous_post,
-        'info': info,
         'user_logged_in': user_logged_in,
     }
 
@@ -80,9 +75,7 @@ def add(request):
 
         if not form.is_valid():
             # Prepares the context for the page
-            info = Info.load()
             context = {
-                'info': info,
                 'user_logged_in': True,
                 'form': form,
             }
@@ -91,13 +84,11 @@ def add(request):
 
         form.save()
         return redirect('blog:index')
-    
-    info = Info.load()
+
     form = AddPost()
 
     # Prepares the context for the page
     context = {
-        'info': info,
         'user_logged_in': True,
         'form': form,
     }
@@ -116,9 +107,7 @@ def change(request, post_id):
 
         if not form.is_valid():
             # Prepares the context for the page
-            info = Info.load()
             context = {
-                'info': info,
                 'user_logged_in': True,
                 'form': form,
             }
@@ -127,13 +116,11 @@ def change(request, post_id):
 
         form.save()
         return redirect('blog:single', post_id=post_id)
-    
-    info = Info.load()
+
     form = ChangePost(instance=post)
 
     # Prepares the context for the page
     context = {
-        'info': info,
         'user_logged_in': True,
         'form': form,
     }
@@ -152,9 +139,7 @@ def delete(request, post_id):
 
         if not form.is_valid():
             # Prepares the context for the page
-            info = Info.load()
             context = {
-                'info': info,
                 'user_logged_in': True,
                 'form': form,
                 'post': post,
@@ -165,12 +150,10 @@ def delete(request, post_id):
         post.delete()
         return redirect('blog:index')
     
-    info = Info.load()
     form = DeletePost()
 
     # Prepares the context for the page
     context = {
-        'info': info,
         'user_logged_in': True,
         'form': form,
         'post': post,
