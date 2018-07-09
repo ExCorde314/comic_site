@@ -11,7 +11,7 @@ proxy:
     - 8000:8000
 
 comic-site:
-  image: excorde314/comic-site:1.3
+  image: excorde314/comic-site:1.4
   container_name: comic-site
   external_links:
     -  mysql:db
@@ -27,3 +27,4 @@ comic-site:
                     python manage.py loaddata /app/fixtures/db.json &&
                     python manage.py loaddata /app/fixtures/test_fixtures.json &&
                     gunicorn --reload --bind 0.0.0.0:8080 comic_site.wsgi"
+
